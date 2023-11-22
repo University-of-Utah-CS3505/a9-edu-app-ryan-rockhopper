@@ -1,5 +1,5 @@
 ```
-Team Name   : Coders For Christ
+Team Name   : Coders For Christ: New Testament
 Team Members: August O'Rourke
               Luke Hamling
               Ryan Dalrymple
