@@ -6,15 +6,329 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>950</width>
+    <height>693</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
-  <widget class="QMenuBar" name="menubar"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="startUpScreen" native="true">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>920</width>
+      <height>629</height>
+     </rect>
+    </property>
+    <widget class="QWidget" name="verticalLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>921</width>
+       <height>621</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="startupVecticalLayout">
+      <item>
+       <widget class="QLabel" name="gameTitle">
+        <property name="font">
+         <font>
+          <family>Purisa</family>
+          <pointsize>24</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Cat and Distracted Mouse</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="gameDescription">
+        <property name="font">
+         <font>
+          <family>Droid Sans Fallback</family>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>The purpose of this game is to inform people about the dangers of distracted driving. You play as a field mouse who must dodge all of the vicious cats trying to eat you. Your rat-phone will try to distract you; stay focused, your life depends on it!</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="startupUpperSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="startupHorizontalLayout">
+        <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+         <widget class="QPushButton" name="startButton">
+          <property name="minimumSize">
+           <size>
+            <width>150</width>
+            <height>100</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Start!</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="startupLowerSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="authors">
+        <property name="text">
+         <string>Created by: August O'Rourke, Luke Hamling, Ryan Dalrymple, and Vincentio Dane</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="mainScreen" native="true">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>920</width>
+      <height>629</height>
+     </rect>
+    </property>
+    <widget class="QWidget" name="gameplayArea" native="true">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>691</width>
+       <height>629</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QWidget" name="verticalLayoutWidget_2">
+     <property name="geometry">
+      <rect>
+       <x>700</x>
+       <y>0</y>
+       <width>211</width>
+       <height>621</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="statsLayout">
+      <item>
+       <layout class="QHBoxLayout" name="levelLayout">
+        <item alignment="Qt::AlignLeft">
+         <widget class="QLabel" name="levelLabel">
+          <property name="text">
+           <string>Current Level:</string>
+          </property>
+         </widget>
+        </item>
+        <item alignment="Qt::AlignRight">
+         <widget class="QLabel" name="levelValue">
+          <property name="text">
+           <string>x</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="timeAliveLayout">
+        <item alignment="Qt::AlignLeft">
+         <widget class="QLabel" name="timeAliveLabel">
+          <property name="text">
+           <string>Time Alive:</string>
+          </property>
+         </widget>
+        </item>
+        <item alignment="Qt::AlignRight">
+         <widget class="QLabel" name="timeAliveValue">
+          <property name="text">
+           <string>xx:xx</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="catsDodgedLayout">
+        <item>
+         <widget class="QLabel" name="catsDodgedLabel">
+          <property name="text">
+           <string>Cats Dodged:</string>
+          </property>
+         </widget>
+        </item>
+        <item alignment="Qt::AlignRight">
+         <widget class="QLabel" name="catsDodgedValue">
+          <property name="text">
+           <string>x</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="notificationsLayout">
+        <item>
+         <widget class="QLabel" name="notificationsAcknowledgedLabel">
+          <property name="text">
+           <string>Notifications Acknowledged:</string>
+          </property>
+         </widget>
+        </item>
+        <item alignment="Qt::AlignRight">
+         <widget class="QLabel" name="notificationsAcknowledgedValue">
+          <property name="text">
+           <string>x</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="gameOverButton">
+        <property name="text">
+         <string>FOR_TEST: game over</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="gameOverScreen" native="true">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>920</width>
+      <height>629</height>
+     </rect>
+    </property>
+    <widget class="QWidget" name="verticalLayoutWidget_3">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>921</width>
+       <height>621</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="gameOverVerticalLayout">
+      <item>
+       <widget class="QLabel" name="gameOver">
+        <property name="font">
+         <font>
+          <family>Gayathri</family>
+          <pointsize>32</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Game Over!</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="gameOverStatsLayout">
+        <item alignment="Qt::AlignLeft">
+         <widget class="QLabel" name="statsRelatedToDistractedDriving">
+          <property name="text">
+           <string>Distracted driving stats... you are xx% more likely to crash because of etc.</string>
+          </property>
+         </widget>
+        </item>
+        <item alignment="Qt::AlignRight">
+         <widget class="QLabel" name="survivalSeconds">
+          <property name="text">
+           <string>You survived xx seconds since the last notification!</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QWidget" name="gameOverImageWidget" native="true"/>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>950</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
