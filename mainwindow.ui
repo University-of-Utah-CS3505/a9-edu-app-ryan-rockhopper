@@ -140,14 +140,17 @@
       <height>629</height>
      </rect>
     </property>
-    <widget class="QWidget" name="gameplayArea" native="true">
+    <widget class="GameWorld" name="gameplayArea" native="true">
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>0</y>
+       <y>8</y>
        <width>691</width>
-       <height>629</height>
+       <height>601</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:rgb(0, 0, 0)</string>
      </property>
     </widget>
     <widget class="QWidget" name="verticalLayoutWidget_2">
@@ -303,6 +306,9 @@
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QWidget" name="gameOverImageWidget" native="true"/>
+        </item>
         <item alignment="Qt::AlignRight">
          <widget class="QLabel" name="survivalSeconds">
           <property name="text">
@@ -311,9 +317,6 @@
          </widget>
         </item>
        </layout>
-      </item>
-      <item>
-       <widget class="QWidget" name="gameOverImageWidget" native="true"/>
       </item>
      </layout>
     </widget>
@@ -325,12 +328,20 @@
      <x>0</x>
      <y>0</y>
      <width>950</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>GameWorld</class>
+   <extends>QWidget</extends>
+   <header location="global">gameworld.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
