@@ -20,13 +20,15 @@ public slots:
 private:
     float width;
     float height;
-
+    bool spawnNewCat;
     b2World world;
     QTimer worldCycle;
     b2Body* mouseBody;
     QImage mouseImg;
     vector<b2Body*> catBodies;
     QImage catImg;
+
+    void SpawnNewCat();
 };
 
 #endif // GAMEWORLD_H
