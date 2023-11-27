@@ -1,5 +1,4 @@
 #include "gameWorld.h"
-#include "gamecollisionlistener.h"
 #include <QPainter>
 #include <QDebug>
 
@@ -13,8 +12,8 @@ GameWorld::GameWorld(QWidget *parent) : QWidget(parent),
     height = 601.0f;
     float xMidpoint = width / 2.0f;
     spawnNewCat = true;
-    GameCollisionListener listener;
     world.SetContactListener(&listener);
+
     qDebug() << "set Listener";
     // Define the ground body.
     b2BodyDef groundBodyDef;

@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <Box2D/Box2D.h>
 #include <QTimer>
+#include "gamecollisionlistener.h"
 using std::vector;
 
 class GameWorld : public QWidget
@@ -21,6 +22,7 @@ private:
     float width;
     float height;
     bool spawnNewCat;
+    GameCollisionListener listener;
     b2World world;
     QTimer worldCycle;
     b2Body* mouseBody;
