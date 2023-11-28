@@ -53,9 +53,9 @@ void MainWindow::mainScreen()
 
     QScreen *screen = QGuiApplication::primaryScreen();
     QRect  screenGeometry = screen->geometry();
-    // TODO: sometimes it selects a number on the edge and the screen will be half cut
-    int xPosition = rand() % screenGeometry.width();
-    int yPosition = rand() % screenGeometry.height();
+    // TODO: sometimes it selects a number on the edge and the screen will be half cut and it looks ugly when it does
+    int xPosition = (rand() % screenGeometry.width()) % 950;
+    int yPosition = (rand() % screenGeometry.height()) % 693;
     distractionWindow.setGeometry(xPosition, yPosition, 400, 300);
     distractionWindow.setWindowFlags(Qt::FramelessWindowHint);
     distractionWindow.show();
