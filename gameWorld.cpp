@@ -71,6 +71,14 @@ void GameWorld::paintEvent(QPaintEvent *) {
         painter.drawImage(position.x - 41.0f, position.y - 50.0f, catImg);
     }
 
+    // add black border on the game
+    QPen pen(Qt::black);
+    int penWidth =  2;
+    pen.setWidth(penWidth);
+    painter.setPen(pen);
+    QRect paintingFrame(0, 0, width, height);
+    painter.drawRect(paintingFrame);
+
     painter.end();
 }
 
