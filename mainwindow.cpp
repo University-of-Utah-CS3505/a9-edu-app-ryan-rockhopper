@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QScreen>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -50,6 +51,13 @@ void MainWindow::mainScreen()
     ui->mainScreen      ->setEnabled(true);
     ui->mainScreen      ->show();
 
+    QScreen *screen = QGuiApplication::primaryScreen();
+    QRect  screenGeometry = screen->geometry();
+    // TODO: sometimes it selects a number on the edge and the screen will be half cut
+    int xPosition = rand() % screenGeometry.width();
+    int yPosition = rand() % screenGeometry.height();
+    distractionWindow.setGeometry(xPosition, yPosition, 400, 300);
+    distractionWindow.setWindowFlags(Qt::FramelessWindowHint);
     distractionWindow.show();
 }
 
