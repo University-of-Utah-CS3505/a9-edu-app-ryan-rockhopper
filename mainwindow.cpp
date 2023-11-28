@@ -49,6 +49,8 @@ void MainWindow::mainScreen()
 
     ui->mainScreen      ->setEnabled(true);
     ui->mainScreen      ->show();
+
+    //distractionWindow.show();
 }
 
 void MainWindow::gameOverScreen()
