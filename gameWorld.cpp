@@ -11,7 +11,6 @@ GameWorld::GameWorld(QWidget *parent) : QWidget(parent),
     width = 691.0f;
     height = 601.0f;
     float xMidpoint = width / 2.0f;
-    spawnNewCat = true;
     world.SetContactListener(&listener);
 
     qDebug() << "set Listener";
@@ -55,6 +54,8 @@ GameWorld::GameWorld(QWidget *parent) : QWidget(parent),
 
     connect(&worldCycle, &QTimer::timeout, this, &GameWorld::updateWorld);
     worldCycle.start(10);
+
+    SpawnNewCat();
 }
 
 void GameWorld::paintEvent(QPaintEvent *) {
@@ -76,10 +77,6 @@ void GameWorld::paintEvent(QPaintEvent *) {
 void GameWorld::updateWorld() {
     // It is generally best to keep the time step and iterations fixed.
     world.Step(1.0/60.0, 6, 2);
-    if(spawnNewCat)
-    {
-        SpawnNewCat();
-    }
     update();
 }
 
@@ -88,7 +85,7 @@ void GameWorld::SpawnNewCat()
     b2BodyDef catBodyDef;
     catBodyDef.angularDamping = 1000; //this keeps the cat from rotating and making the collision weird
     catBodyDef.type = b2_dynamicBody;
-    catBodyDef.position.Set(rand() % (int)width, 0.0f);//0.0f, 4.0f);
+    catBodyDef.position.Set(rand() % (int)width, -80.0f);//0.0f, 4.0f);
     int catData = 2;
     b2Body* cat = world.CreateBody(&catBodyDef);
     cat->SetUserData((void*) catData);
@@ -104,6 +101,5 @@ void GameWorld::SpawnNewCat()
     fixtureDef.restitution = 0.9;
     cat->CreateFixture(&fixtureDef);
     catBodies.push_back(cat);
-    spawnNewCat = false;
-    QTimer::singleShot(5000, Qt::PreciseTimer, this, [this](){this->spawnNewCat = true;});
+    QTimer::singleShot(rand() % catSpawnMaxWait, Qt::PreciseTimer, this, [this](){SpawnNewCat();});
 }

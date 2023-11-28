@@ -21,10 +21,12 @@ public slots:
 private:
     float width;
     float height;
-    bool spawnNewCat;
     GameCollisionListener listener;
     b2World world;
+
+    int catSpawnMaxWait = 5000;
     QTimer worldCycle;
+
     b2Body* mouseBody;
     QImage mouseImg;
     vector<b2Body*> catBodies;
