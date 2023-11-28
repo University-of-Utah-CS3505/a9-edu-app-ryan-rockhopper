@@ -14,3 +14,11 @@ void gameModel::startGame()
 {
 
 }
+void gameModel::updateCatsDodged()
+{
+
+}
+void gameModel::updatePopUpsClosed()
+{
+
+}
