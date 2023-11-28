@@ -53,7 +53,7 @@ void MainWindow::mainScreen()
 
     QScreen *screen = QGuiApplication::primaryScreen();
     QRect  screenGeometry = screen->geometry();
-    // TODO: sometimes it selects a number on the edge and the screen will be half cut and it looks ugly when it does
+    // 950x693 is the game screen size so it appears within the game screen always, also make a signal in model to do this and add timer.
     int xPosition = (rand() % screenGeometry.width()) % 950;
     int yPosition = (rand() % screenGeometry.height()) % 693;
     distractionWindow.setGeometry(xPosition, yPosition, 400, 300);
