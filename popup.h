@@ -17,6 +17,10 @@ public:
 
 private:
     Ui::PopUp *ui;
+
+private slots:
+    void on_yesButton_clicked();
+    void on_noButton_clicked();
 };
 
 #endif // POPUP_H
