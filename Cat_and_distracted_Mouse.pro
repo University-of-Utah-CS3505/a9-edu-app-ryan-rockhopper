@@ -58,7 +58,8 @@ SOURCES += \
     gameWorld.cpp \
     gamecollisionlistener.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    popup.cpp
 
 HEADERS += \
     Box2D/Box2D.h \
@@ -110,10 +111,12 @@ HEADERS += \
     Box2D/Rope/b2Rope.h \
     gameWorld.h \
     gamecollisionlistener.h \
-    mainwindow.h
+    mainwindow.h \
+    popup.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    popup.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

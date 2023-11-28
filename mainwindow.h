@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "popup.h"
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -21,6 +22,7 @@ signals:
 
 private:
     Ui::MainWindow *ui;
+    PopUp distractionWindow;
 
     /// @brief Displays the start up screen when the application begins.
     void startupScreen();
