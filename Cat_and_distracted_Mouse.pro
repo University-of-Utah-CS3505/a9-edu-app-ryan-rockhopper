@@ -57,6 +57,7 @@ SOURCES += \
     Box2D/Rope/b2Rope.cpp \
     gameWorld.cpp \
     gamecollisionlistener.cpp \
+    gamemodel.cpp \
     main.cpp \
     mainwindow.cpp \
     popup.cpp
@@ -111,6 +112,7 @@ HEADERS += \
     Box2D/Rope/b2Rope.h \
     gameWorld.h \
     gamecollisionlistener.h \
+    gamemodel.h \
     mainwindow.h \
     popup.h
 
