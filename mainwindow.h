@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include "popup.h"
-#include "gamemodel.h"
+#include "statsmodel.h"
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE

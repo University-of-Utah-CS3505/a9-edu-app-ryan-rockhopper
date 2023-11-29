@@ -1,5 +1,5 @@
-#ifndef GAMEWORLD_H
-#define GAMEWORLD_H
+#ifndef WORLD_H
+#define WORLD_H
 
 #include <QWidget>
 #include <Box2D/Box2D.h>
@@ -37,4 +37,4 @@ private:
     void SpawnNewCat();
 };
 
-#endif // GAMEWORLD_H
+#endif // WORLD_H

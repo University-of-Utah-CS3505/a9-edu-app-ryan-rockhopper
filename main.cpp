@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "gamemodel.h"
+#include "statsmodel.h"
 
 #include <QApplication>
 

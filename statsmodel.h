@@ -1,5 +1,5 @@
-#ifndef GAMEMODEL_H
-#define GAMEMODEL_H
+#ifndef STATSMODEL_H
+#define STATSMODEL_H
 #include <QElapsedTimer>
 #include <QObject>
 #include <QTimer>
@@ -65,4 +65,4 @@ private:
     };
 };
 
-#endif // GAMEMODEL_H
+#endif // STATSMODEL_H

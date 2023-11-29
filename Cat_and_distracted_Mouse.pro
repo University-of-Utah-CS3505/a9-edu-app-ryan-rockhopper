@@ -55,12 +55,12 @@ SOURCES += \
     Box2D/Dynamics/b2World.cpp \
     Box2D/Dynamics/b2WorldCallbacks.cpp \
     Box2D/Rope/b2Rope.cpp \
-    gameWorld.cpp \
     gamecollisionlistener.cpp \
-    gamemodel.cpp \
     main.cpp \
     mainwindow.cpp \
-    popup.cpp
+    popup.cpp \
+    statsmodel.cpp \
+    world.cpp
 
 HEADERS += \
     Box2D/Box2D.h \
@@ -110,11 +110,11 @@ HEADERS += \
     Box2D/Dynamics/b2World.h \
     Box2D/Dynamics/b2WorldCallbacks.h \
     Box2D/Rope/b2Rope.h \
-    gameWorld.h \
     gamecollisionlistener.h \
-    gamemodel.h \
     mainwindow.h \
-    popup.h
+    popup.h \
+    statsmodel.h \
+    world.h
 
 FORMS += \
     mainwindow.ui \
