@@ -22,6 +22,8 @@ public slots:
     void moveLeft();
     /// @brief Moves the mouse to the right when right arrow is pressed.
     void moveRight();
+    /// @brief Sets our max spawn wait time.
+    void setCatSpawnMaxWait(int newMax);
 
 private:
     const float width = 691.0f;

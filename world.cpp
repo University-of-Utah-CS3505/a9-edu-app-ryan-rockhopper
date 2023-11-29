@@ -8,7 +8,6 @@ World::World(QWidget *parent) : QWidget(parent),
     mouseImg(":/mouse.png"),
     catImg(":/cat.png")
 {
-
     QAction *panLeftShortcut = new QAction(this);
     panLeftShortcut->setShortcut(Qt::Key_Left);
     connect(panLeftShortcut,
@@ -73,16 +72,6 @@ World::World(QWidget *parent) : QWidget(parent),
     SpawnNewCat();
 }
 
-void World::moveLeft() {
-    qDebug() << "left";
-    mouseBody->SetLinearVelocity(b2Vec2(-80,0));
-}
-
-void World::moveRight() {
-    qDebug() << "right";
-    mouseBody->SetLinearVelocity(b2Vec2(80,0));
-}
-
 void World::paintEvent(QPaintEvent *) {
     QPainter painter(this);
     b2Vec2 position = mouseBody->GetPosition();
@@ -111,6 +100,27 @@ void World::updateWorld() {
     // It is generally best to keep the time step and iterations fixed.
     world.Step(1.0/60.0, 6, 2);
     update();
+}
+
+void World::moveLeft()
+{
+    if (mouseBody->GetPosition().x > 0)
+        mouseBody->SetLinearVelocity(b2Vec2(-80,0));
+    else
+        mouseBody->SetLinearVelocity(b2Vec2(0,0));
+}
+
+void World::moveRight()
+{
+    if (mouseBody->GetPosition().x < width)
+        mouseBody->SetLinearVelocity(b2Vec2(80,0));
+    else
+        mouseBody->SetLinearVelocity(b2Vec2(0,0));
+}
+
+void World::setCatSpawnMaxWait(int newMax)
+{
+    catSpawnMaxWait = newMax;
 }
 
 void World::SpawnNewCat()
