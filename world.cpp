@@ -25,8 +25,6 @@ World::World(QWidget *parent) : QWidget(parent),
             &World::moveRight);
     this->addAction(panRightShortcut);
 
-    width = 691.0f;
-    height = 601.0f;
     float xMidpoint = width / 2.0f;
     world.SetContactListener(&listener);
 
@@ -40,14 +38,14 @@ World::World(QWidget *parent) : QWidget(parent),
 
     // Define the ground box shape.
     b2PolygonShape groundBox;
-    groundBox.SetAsBox(width, 10.0f);
+    groundBox.SetAsBox(width * 4, 10.0f);
     groundBody->CreateFixture(&groundBox, 0.0f);
 
     // Define dynamic body. We set its position and call the body factory.
     b2BodyDef mouseBodyDef;
     mouseBodyDef.angularDamping = 1000; // keeps mouse from rotating and making collision weird
     mouseBodyDef.type = b2_dynamicBody;
-    mouseBodyDef.position.Set(xMidpoint, 561.0f);//0.0f, 4.0f);
+    mouseBodyDef.position.Set(xMidpoint, 561.0f);
     mouseBody = world.CreateBody(&mouseBodyDef);
     int mouseData = 1;
     mouseBody->SetUserData((void*) mouseData);

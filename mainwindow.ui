@@ -146,7 +146,7 @@
       <height>629</height>
      </rect>
     </property>
-    <widget class="GameWorld" name="gameplayArea" native="true">
+    <widget class="World" name="gameplayArea" native="true">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -334,7 +334,7 @@
      <x>0</x>
      <y>0</y>
      <width>950</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
@@ -342,9 +342,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>GameWorld</class>
+   <class>World</class>
    <extends>QWidget</extends>
-   <header location="global">gameworld.h</header>
+   <header location="global">world.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -24,6 +24,13 @@ statsModel::statsModel(QObject *parent) : QObject{parent}
             &statsModel::calculateStats);
 }
 
+void statsModel::startGame()
+{
+    playTimeStopwatch.start();
+    oneSecond       ->start();
+    popUpFrequency  ->start();
+}
+
 void statsModel::processDeath()
 {
     //game over, send to game over screen
@@ -31,13 +38,6 @@ void statsModel::processDeath()
     string secondsSinceLastPopUp    = to_string(popUpToDeath.elapsed() / 1000);
 
     emit deathScreen(catsDodged, finalTimeAlive, secondsSinceLastPopUp, popUpsClosed, level);
-}
-
-void statsModel::startGame()
-{
-    playTimeStopwatch.start();
-    oneSecond       ->start();
-    popUpFrequency  ->start();
 }
 
 void statsModel::updateCatsDodged()
@@ -88,6 +88,7 @@ string statsModel::millisecondsToMinAndSec(qint64 millisecondsElapsed)
     return minAndSec;
 }
 
+// todo refactor this if branch to just be a bunch of set single shot
 void statsModel::setGameLevel()
 {
     if(level == 5)

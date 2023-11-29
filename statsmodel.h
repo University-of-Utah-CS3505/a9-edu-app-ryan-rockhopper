@@ -55,6 +55,7 @@ private:
     ///         the player has been playing. Every 30 seconds, the level increases to a max of 5.
     void setGameLevel();
 
+    /// @brief Constants of time in Millisenconds
     enum levelTimes
     {
         twoMinThirtySeconds = 150000,
