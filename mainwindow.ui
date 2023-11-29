@@ -164,7 +164,7 @@
       <rect>
        <x>700</x>
        <y>0</y>
-       <width>211</width>
+       <width>215</width>
        <height>621</height>
       </rect>
      </property>
@@ -181,7 +181,7 @@
         <item alignment="Qt::AlignRight">
          <widget class="QLabel" name="levelValue">
           <property name="text">
-           <string>x</string>
+           <string>1</string>
           </property>
          </widget>
         </item>
@@ -199,7 +199,7 @@
         <item alignment="Qt::AlignRight">
          <widget class="QLabel" name="timeAliveValue">
           <property name="text">
-           <string>xx:xx</string>
+           <string>00:00</string>
           </property>
          </widget>
         </item>
@@ -217,7 +217,7 @@
         <item alignment="Qt::AlignRight">
          <widget class="QLabel" name="catsDodgedValue">
           <property name="text">
-           <string>x</string>
+           <string>0</string>
           </property>
          </widget>
         </item>
@@ -235,7 +235,7 @@
         <item alignment="Qt::AlignRight">
          <widget class="QLabel" name="notificationsAcknowledgedValue">
           <property name="text">
-           <string>x</string>
+           <string>0</string>
           </property>
          </widget>
         </item>
@@ -334,7 +334,7 @@
      <x>0</x>
      <y>0</y>
      <width>950</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

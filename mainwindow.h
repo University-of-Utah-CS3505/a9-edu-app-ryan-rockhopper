@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "popup.h"
+#include "gamemodel.h"
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -13,10 +14,19 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(gameModel& model, QWidget *parent = nullptr);
     ~MainWindow();
 
 public slots:
+    /// @brief Places a pop up on the screen after recieving a signal from the model.
+    void placePopUp();
+
+    /// @brief Updates all stat labels in the main screen after recieving a signal from the model.
+    /// @param catsDodged is the number of cats dodged by the player so far
+    /// @param timeAlive is the time the player has been playing in mm:ss format
+    /// @param popUpsClosed is the amount of pop ups that has been closed by the player
+    /// @param currentLevel is the level the player is currently on
+    void updateStatValues(int catsDodged, string timeAlive, int popUpsClosed, int currentLevel);
 
 signals:
 

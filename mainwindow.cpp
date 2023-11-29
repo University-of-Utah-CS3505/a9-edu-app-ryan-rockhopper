@@ -1,8 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QString>
 #include <QScreen>
 
-MainWindow::MainWindow(QWidget *parent)
+
+MainWindow::MainWindow(gameModel& model, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
@@ -13,8 +15,27 @@ MainWindow::MainWindow(QWidget *parent)
             &QPushButton::clicked,
             this,
             &MainWindow::mainScreen);
-    //TODO: Remove this later, this is to show the gameplay area before we promote it to our custom widget
-    ui->gameplayArea->setStyleSheet("background-color:green;");
+    connect(ui->startButton,
+            &QPushButton::clicked,
+            &model,
+            &gameModel::startGame);
+
+    //Generate a pop up based on the timer in the model
+    connect(&model,
+            &gameModel::drawPopUp,
+            this,
+            &MainWindow::placePopUp);
+
+    //Update stats in main screen every second
+    connect(&model,
+            &gameModel::updateLabels,
+            this,
+            &MainWindow::updateStatValues);
+
+
+
+
+
 
     //TODO: Remove this entire button later. It is only as a manual way to "lose" the game.
     connect(ui->gameOverButton,
@@ -50,15 +71,6 @@ void MainWindow::mainScreen()
 
     ui->mainScreen      ->setEnabled(true);
     ui->mainScreen      ->show();
-
-    QScreen *screen = QGuiApplication::primaryScreen();
-    QRect  screenGeometry = screen->geometry();
-    // 950x693 is the game screen size so it appears within the game screen always, also make a signal in model to do this and add timer.
-    int xPosition = rand() % 950;
-    int yPosition = rand() % 693;
-    distractionWindow.setGeometry(xPosition, yPosition, 400, 300);
-    distractionWindow.setWindowFlags(Qt::FramelessWindowHint);
-    distractionWindow.show();
 }
 
 void MainWindow::gameOverScreen()
@@ -70,4 +82,26 @@ void MainWindow::gameOverScreen()
 
     ui->gameOverScreen  ->setEnabled(true);
     ui->gameOverScreen  ->show();
+}
+
+//TODO: Create a stack (or vector or something) of pop-ups that are on screen. Right now generating a pop up gets rid of the old one even if it wasn't closed.
+//TODO: Pop up appears on my (Ryan) second monitor and not within game window DEBUG
+void MainWindow::placePopUp()
+{
+    QScreen *screen = QGuiApplication::primaryScreen();
+    QRect  screenGeometry = screen->geometry();
+    // 950x693 is the game screen size so it appears within the game screen always, also make a signal in model to do this and add timer.
+    int xPosition = rand() % 950;
+    int yPosition = rand() % 693;
+    distractionWindow.setGeometry(xPosition, yPosition, 400, 300);
+    distractionWindow.setWindowFlags(Qt::FramelessWindowHint);
+    distractionWindow.show();
+}
+
+void MainWindow::updateStatValues(int catsDodged, string timeAlive, int popUpsClosed, int currentLevel)
+{
+    ui->catsDodgedValue->setText(QString::number(catsDodged));
+    ui->timeAliveValue->setText(QString::fromStdString(timeAlive));
+    ui->notificationsAcknowledgedValue->setText(QString::number(popUpsClosed));
+    ui->levelValue->setText(QString::number(currentLevel));
 }
