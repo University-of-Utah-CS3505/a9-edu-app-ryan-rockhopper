@@ -32,16 +32,16 @@ MainWindow::MainWindow(statsModel& model, QWidget *parent)
             this,
             &MainWindow::updateStatValues);
 
-
-
-
-
-
     //TODO: Remove this entire button later. It is only as a manual way to "lose" the game.
     connect(ui->gameOverButton,
             &QPushButton::clicked,
             this,
             &MainWindow::gameOverScreen);
+
+    connect(&model,
+            &statsModel::updateCatSpawnMaxWait,
+            ui->gameplayArea,
+            &World::setCatSpawnMaxWait);
 
     startupScreen();
 }

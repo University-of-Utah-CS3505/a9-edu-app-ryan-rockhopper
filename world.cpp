@@ -128,7 +128,7 @@ void World::SpawnNewCat()
     b2BodyDef catBodyDef;
     catBodyDef.angularDamping = 1000; //this keeps the cat from rotating and making the collision weird
     catBodyDef.type = b2_dynamicBody;
-    catBodyDef.position.Set(rand() % (int)width, -80.0f);//0.0f, 4.0f);
+    catBodyDef.position.Set(rand() % (int)width, -80.0f);
     int catData = 2;
     b2Body* cat = world.CreateBody(&catBodyDef);
     cat->SetUserData((void*) catData);
@@ -137,7 +137,6 @@ void World::SpawnNewCat()
     dynamicBox.SetAsBox(41.0f, 50.0f);
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &dynamicBox;
-
 
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;

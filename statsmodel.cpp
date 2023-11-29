@@ -1,5 +1,6 @@
 #include "statsmodel.h"
 #include <string>
+#include <QDebug>
 
 using std::string;
 using std::to_string;
@@ -22,6 +23,27 @@ statsModel::statsModel(QObject *parent) : QObject{parent}
             &QTimer::timeout,
             this,
             &statsModel::calculateStats);
+
+    currentPopUpFrequency   = 20000;
+    currentCatSpawnMaxWait  = 5000;
+
+    qDebug() << "tet";
+    levelUpper->setInterval(thirtySeconds);
+    connect(levelUpper,
+            &QTimer::timeout,
+            this,
+            &statsModel::levelUp);
+}
+
+void statsModel::levelUp() {
+    level++;
+
+    currentPopUpFrequency   = currentPopUpFrequency * 0.92f;
+    popUpFrequency->setInterval(currentPopUpFrequency);
+
+    currentCatSpawnMaxWait  = currentCatSpawnMaxWait * 0.8f;
+    emit updateCatSpawnMaxWait(currentCatSpawnMaxWait);
+    qDebug() << "Leveled up to:" << level << ". currentPopUpFrequency = " << currentPopUpFrequency << ". currentCatSpawnMaxWait = " << currentCatSpawnMaxWait;
 }
 
 void statsModel::startGame()
@@ -29,6 +51,7 @@ void statsModel::startGame()
     playTimeStopwatch.start();
     oneSecond       ->start();
     popUpFrequency  ->start();
+    levelUpper      ->start();
 }
 
 void statsModel::processDeath()
@@ -55,9 +78,6 @@ void statsModel::updatePopUpsClosed()
 void statsModel::calculateStats()
 {
     string timePlayedSoFar = millisecondsToMinAndSec(playTimeStopwatch.elapsed());
-
-    if(playTimeStopwatch.elapsed() % thirtySeconds < 1000) //Every 30 seconds with a margin of error of 1 second, update the game level.
-        setGameLevel();
 
     emit updateLabels(catsDodged, timePlayedSoFar, popUpsClosed, level);
 }
@@ -86,37 +106,4 @@ string statsModel::millisecondsToMinAndSec(qint64 millisecondsElapsed)
 
     string minAndSec    = minuteString + ":" + secondString;
     return minAndSec;
-}
-
-// todo refactor this if branch to just be a bunch of set single shot
-void statsModel::setGameLevel()
-{
-    if(level == 5)
-        return;
-
-    if(playTimeStopwatch.elapsed() > twoMin)
-    {
-        level = 5;
-        popUpFrequency->setInterval(1000);
-    }
-    else if(playTimeStopwatch.elapsed() > oneMinThirtySeconds)
-    {
-        level = 4;
-        popUpFrequency->setInterval(2000);
-    }
-    else if(playTimeStopwatch.elapsed() > oneMin)
-    {
-        level = 3;
-        popUpFrequency->setInterval(3000);
-    }
-    else if(playTimeStopwatch.elapsed() > thirtySeconds)
-    {
-        level = 2;
-        popUpFrequency->setInterval(4000);
-    }
-    else if(playTimeStopwatch.elapsed() < thirtySeconds)
-    {
-        level = 1;
-        popUpFrequency->setInterval(5000);
-    }
 }
