@@ -17,6 +17,8 @@ signals:
 
 public slots:
     void updateWorld();
+    void moveLeft();
+    void moveRight();
 
 private:
     float width;

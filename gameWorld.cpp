@@ -8,6 +8,23 @@ GameWorld::GameWorld(QWidget *parent) : QWidget(parent),
     mouseImg(":/mouse.png"),
     catImg(":/cat.png")
 {
+
+    QAction *panLeftShortcut = new QAction(this);
+    panLeftShortcut->setShortcut(Qt::Key_Left);
+    connect(panLeftShortcut,
+            &QAction::triggered,
+            this,
+            &GameWorld::moveLeft);
+    this->addAction(panLeftShortcut);
+
+    QAction *panRightShortcut = new QAction(this);
+    panRightShortcut->setShortcut(Qt::Key_Right);
+    connect(panRightShortcut,
+            &QAction::triggered,
+            this,
+            &GameWorld::moveRight);
+    this->addAction(panRightShortcut);
+
     width = 691.0f;
     height = 601.0f;
     float xMidpoint = width / 2.0f;
@@ -30,7 +47,7 @@ GameWorld::GameWorld(QWidget *parent) : QWidget(parent),
     b2BodyDef mouseBodyDef;
     mouseBodyDef.angularDamping = 1000; // keeps mouse from rotating and making collision weird
     mouseBodyDef.type = b2_dynamicBody;
-    mouseBodyDef.position.Set(xMidpoint, 511.0f);//0.0f, 4.0f);
+    mouseBodyDef.position.Set(xMidpoint, 561.0f);//0.0f, 4.0f);
     mouseBody = world.CreateBody(&mouseBodyDef);
     int mouseData = 1;
     mouseBody->SetUserData((void*) mouseData);
@@ -45,7 +62,7 @@ GameWorld::GameWorld(QWidget *parent) : QWidget(parent),
     // Set the box density to be non-zero, so it will be dynamic.
     fixtureDef.density = 1.0f;
     // Override the default friction.
-    fixtureDef.friction = 0.3f;
+    fixtureDef.friction = 8.0f;
     fixtureDef.restitution = 0.9;
 
     // Add the shape to the body.
@@ -58,12 +75,22 @@ GameWorld::GameWorld(QWidget *parent) : QWidget(parent),
     SpawnNewCat();
 }
 
+void GameWorld::moveLeft() {
+    qDebug() << "left";
+    mouseBody->SetLinearVelocity(b2Vec2(-80,0));
+}
+
+void GameWorld::moveRight() {
+    qDebug() << "right";
+    mouseBody->SetLinearVelocity(b2Vec2(80,0));
+}
+
 void GameWorld::paintEvent(QPaintEvent *) {
     QPainter painter(this);
     b2Vec2 position = mouseBody->GetPosition();
     float angle = mouseBody->GetAngle();
 
-    qDebug() << position.x << "," << position.y;//, angle);
+//    qDebug() << position.x << "," << position.y;//, angle);
     painter.drawImage(position.x - 25.0f, position.y - 25.0f, mouseImg);
     for(b2Body* body : catBodies)
     {
