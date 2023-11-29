@@ -7,11 +7,11 @@
 
 using std::string;
 
-class gameModel : public QObject
+class statsModel : public QObject
 {
     Q_OBJECT
 public:
-    explicit gameModel(QObject *parent = nullptr);
+    explicit statsModel(QObject *parent = nullptr);
 
 signals:
     void drawPopUp();

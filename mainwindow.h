@@ -14,7 +14,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(gameModel& model, QWidget *parent = nullptr);
+    MainWindow(statsModel& model, QWidget *parent = nullptr);
     ~MainWindow();
 
 public slots:

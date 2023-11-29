@@ -1,11 +1,11 @@
-#include "gamemodel.h"
+#include "statsmodel.h"
 #include <string>
 
 using std::string;
 using std::to_string;
 
 
-gameModel::gameModel(QObject *parent) : QObject{parent}
+statsModel::statsModel(QObject *parent) : QObject{parent}
 {
     level           = 1;
     popUpsClosed    = 0;
@@ -17,14 +17,14 @@ gameModel::gameModel(QObject *parent) : QObject{parent}
     connect(popUpFrequency,
             &QTimer::timeout,
             this,
-            &gameModel::generatePopUp);
+            &statsModel::generatePopUp);
     connect(oneSecond,
             &QTimer::timeout,
             this,
-            &gameModel::calculateStats);
+            &statsModel::calculateStats);
 }
 
-void gameModel::processDeath()
+void statsModel::processDeath()
 {
     //game over, send to game over screen
     string finalTimeAlive           = millisecondsToMinAndSec(playTimeStopwatch.elapsed());
@@ -33,26 +33,26 @@ void gameModel::processDeath()
     emit deathScreen(catsDodged, finalTimeAlive, secondsSinceLastPopUp, popUpsClosed, level);
 }
 
-void gameModel::startGame()
+void statsModel::startGame()
 {
     playTimeStopwatch.start();
     oneSecond       ->start();
     popUpFrequency  ->start();
 }
 
-void gameModel::updateCatsDodged()
+void statsModel::updateCatsDodged()
 {
     catsDodged++;
     calculateStats();
 }
 
-void gameModel::updatePopUpsClosed()
+void statsModel::updatePopUpsClosed()
 {
     popUpsClosed++;
     calculateStats();
 }
 
-void gameModel::calculateStats()
+void statsModel::calculateStats()
 {
     string timePlayedSoFar = millisecondsToMinAndSec(playTimeStopwatch.elapsed());
 
@@ -62,14 +62,14 @@ void gameModel::calculateStats()
     emit updateLabels(catsDodged, timePlayedSoFar, popUpsClosed, level);
 }
 
-void gameModel::generatePopUp()
+void statsModel::generatePopUp()
 {
     popUpToDeath.restart();
 
     emit drawPopUp();
 }
 
-string gameModel::millisecondsToMinAndSec(qint64 millisecondsElapsed)
+string statsModel::millisecondsToMinAndSec(qint64 millisecondsElapsed)
 {
     long int seconds    = millisecondsElapsed / 1000;
     long int minutes    = seconds / 60;
@@ -88,7 +88,7 @@ string gameModel::millisecondsToMinAndSec(qint64 millisecondsElapsed)
     return minAndSec;
 }
 
-void gameModel::setGameLevel()
+void statsModel::setGameLevel()
 {
     if(level == 5)
         return;

@@ -1,8 +1,8 @@
-#include "gameWorld.h"
+#include "World.h"
 #include <QPainter>
 #include <QDebug>
 
-GameWorld::GameWorld(QWidget *parent) : QWidget(parent),
+World::World(QWidget *parent) : QWidget(parent),
     world(b2Vec2(0.0f, 20.0f)),//b2Vec2(0.0f, 10.0f)),
     worldCycle(this),
     mouseImg(":/mouse.png"),
@@ -14,7 +14,7 @@ GameWorld::GameWorld(QWidget *parent) : QWidget(parent),
     connect(panLeftShortcut,
             &QAction::triggered,
             this,
-            &GameWorld::moveLeft);
+            &World::moveLeft);
     this->addAction(panLeftShortcut);
 
     QAction *panRightShortcut = new QAction(this);
@@ -22,7 +22,7 @@ GameWorld::GameWorld(QWidget *parent) : QWidget(parent),
     connect(panRightShortcut,
             &QAction::triggered,
             this,
-            &GameWorld::moveRight);
+            &World::moveRight);
     this->addAction(panRightShortcut);
 
     width = 691.0f;
@@ -69,23 +69,23 @@ GameWorld::GameWorld(QWidget *parent) : QWidget(parent),
     mouseBody->CreateFixture(&fixtureDef);
     qDebug() << "Init world";
 
-    connect(&worldCycle, &QTimer::timeout, this, &GameWorld::updateWorld);
+    connect(&worldCycle, &QTimer::timeout, this, &World::updateWorld);
     worldCycle.start(10);
 
     SpawnNewCat();
 }
 
-void GameWorld::moveLeft() {
+void World::moveLeft() {
     qDebug() << "left";
     mouseBody->SetLinearVelocity(b2Vec2(-80,0));
 }
 
-void GameWorld::moveRight() {
+void World::moveRight() {
     qDebug() << "right";
     mouseBody->SetLinearVelocity(b2Vec2(80,0));
 }
 
-void GameWorld::paintEvent(QPaintEvent *) {
+void World::paintEvent(QPaintEvent *) {
     QPainter painter(this);
     b2Vec2 position = mouseBody->GetPosition();
     float angle = mouseBody->GetAngle();
@@ -109,13 +109,13 @@ void GameWorld::paintEvent(QPaintEvent *) {
     painter.end();
 }
 
-void GameWorld::updateWorld() {
+void World::updateWorld() {
     // It is generally best to keep the time step and iterations fixed.
     world.Step(1.0/60.0, 6, 2);
     update();
 }
 
-void GameWorld::SpawnNewCat()
+void World::SpawnNewCat()
 {
     b2BodyDef catBodyDef;
     catBodyDef.angularDamping = 1000; //this keeps the cat from rotating and making the collision weird

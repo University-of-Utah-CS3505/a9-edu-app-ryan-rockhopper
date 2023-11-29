@@ -4,7 +4,7 @@
 #include <QScreen>
 
 
-MainWindow::MainWindow(gameModel& model, QWidget *parent)
+MainWindow::MainWindow(statsModel& model, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
@@ -18,17 +18,17 @@ MainWindow::MainWindow(gameModel& model, QWidget *parent)
     connect(ui->startButton,
             &QPushButton::clicked,
             &model,
-            &gameModel::startGame);
+            &statsModel::startGame);
 
     //Generate a pop up based on the timer in the model
     connect(&model,
-            &gameModel::drawPopUp,
+            &statsModel::drawPopUp,
             this,
             &MainWindow::placePopUp);
 
     //Update stats in main screen every second
     connect(&model,
-            &gameModel::updateLabels,
+            &statsModel::updateLabels,
             this,
             &MainWindow::updateStatValues);
 

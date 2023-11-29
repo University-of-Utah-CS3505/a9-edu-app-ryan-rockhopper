@@ -7,11 +7,11 @@
 #include "gamecollisionlistener.h"
 using std::vector;
 
-class GameWorld : public QWidget
+class World : public QWidget
 {
     Q_OBJECT
 public:
-    explicit GameWorld(QWidget *parent = nullptr);
+    explicit World(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *);
 signals:
 
