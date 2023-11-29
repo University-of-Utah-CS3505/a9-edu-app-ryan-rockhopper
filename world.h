@@ -4,7 +4,10 @@
 #include <QWidget>
 #include <Box2D/Box2D.h>
 #include <QTimer>
+#include <map>
 #include "gamecollisionlistener.h"
+
+using std::map;
 using std::vector;
 
 class World : public QWidget
@@ -19,19 +22,21 @@ public slots:
     void updateWorld();
     void moveLeft();
     void moveRight();
+    void deleteCat(qint64 catID);
 
 private:
     float width;
     float height;
     GameCollisionListener listener;
     b2World world;
+    qint64 catData = 2;
 
     int catSpawnMaxWait = 5000;
     QTimer worldCycle;
 
     b2Body* mouseBody;
     QImage mouseImg;
-    vector<b2Body*> catBodies;
+    map<qint64, b2Body*> catBodies;
     QImage catImg;
 
     void SpawnNewCat();
