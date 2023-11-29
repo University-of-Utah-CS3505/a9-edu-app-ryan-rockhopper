@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "popup.h"
+#include "stringmatcherpopup.h"
 #include "statsmodel.h"
 #include <QMainWindow>
 
@@ -29,10 +30,12 @@ public slots:
     void updateStatValues(int catsDodged, string timeAlive, int popUpsClosed, int currentLevel);
 
 signals:
+    void spawnStringMatcher();
 
 private:
     Ui::MainWindow *ui;
     PopUp distractionWindow;
+    StringMatcherPopup distractionWindow2;
 
     /// @brief Displays the start up screen when the application begins.
     void startupScreen();
