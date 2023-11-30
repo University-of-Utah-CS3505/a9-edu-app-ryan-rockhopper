@@ -34,7 +34,18 @@ statsModel::statsModel(QObject *parent) : QObject{parent}
             &statsModel::calculateStats);
 }
 
-void statsModel::levelUp() {
+void statsModel::processDeath()
+{
+    popUpFrequency  ->stop();
+    oneSecond       ->stop();
+
+    //game over, send to game over screen
+    string finalTimeAlive           = millisecondsToMinAndSec(playTimeStopwatch.elapsed());
+    string secondsSinceLastPopUp    = to_string(popUpToDeath.elapsed() / 1000);
+}
+
+void statsModel::levelUp() 
+{
     level++;
 
     currentPopUpFrequency   = currentPopUpFrequency * 0.92f;

@@ -1,4 +1,4 @@
-#include "World.h"
+#include "world.h"
 #include <QPainter>
 #include <QDebug>
 
@@ -24,6 +24,14 @@ World::World(QWidget *parent) : QWidget(parent),
             &World::moveRight);
     this->addAction(panRightShortcut);
 
+    connect(&listener,
+            &GameCollisionListener::catHitsFloor,
+            this,
+            &World::markCatsForDeath);
+
+    width = 691.0f;
+    height = 601.0f;
+      
     float xMidpoint = width / 2.0f;
     world.SetContactListener(&listener);
 
@@ -47,7 +55,7 @@ World::World(QWidget *parent) : QWidget(parent),
     mouseBodyDef.position.Set(xMidpoint, 561.0f);
     mouseBody = world.CreateBody(&mouseBodyDef);
     int mouseData = 1;
-    mouseBody->SetUserData((void*) mouseData);
+    mouseBody->SetUserData((void*)mouseData);
     qDebug() << mouseBody->GetUserData();
 
     // Define another box shape for our dynamic body.
@@ -79,9 +87,9 @@ void World::paintEvent(QPaintEvent *) {
     QPixmap background(":/grass_template.png");
     painter.drawPixmap(0, 0, width, height, background);
     painter.drawImage(position.x - 25.0f, position.y - 25.0f, mouseImg);
-    for(b2Body* body : catBodies)
+    for(auto pair : catBodies)
     {
-        b2Vec2 position = body->GetPosition();
+        b2Vec2 position = pair.second->GetPosition();
         painter.drawImage(position.x - 41.0f, position.y - 50.0f, catImg);
     }
 
@@ -100,6 +108,7 @@ void World::updateWorld() {
     // It is generally best to keep the time step and iterations fixed.
     world.Step(1.0/60.0, 6, 2);
     update();
+    deleteCats();
 }
 
 void World::moveLeft()
@@ -129,7 +138,6 @@ void World::SpawnNewCat()
     catBodyDef.angularDamping = 1000; //this keeps the cat from rotating and making the collision weird
     catBodyDef.type = b2_dynamicBody;
     catBodyDef.position.Set(rand() % (int)width, -80.0f);
-    int catData = 2;
     b2Body* cat = world.CreateBody(&catBodyDef);
     cat->SetUserData((void*) catData);
 
@@ -142,6 +150,33 @@ void World::SpawnNewCat()
     fixtureDef.friction = 0.3f;
     fixtureDef.restitution = 0.9;
     cat->CreateFixture(&fixtureDef);
-    catBodies.push_back(cat);
+    catBodies.insert(std::pair<qint64, b2Body*>(catData, cat));
     QTimer::singleShot(rand() % catSpawnMaxWait, Qt::PreciseTimer, this, [this](){SpawnNewCat();});
+    catData++;
+}
+
+void World::markCatsForDeath(qint64 catID)
+{
+    b2Body* cat = catBodies[catID];
+    deadCats[catID] = cat;
+}
+
+void World::deleteCats()
+{
+    for(auto IDandCat : deadCats)
+    {
+        b2Body* cat = IDandCat.second;
+
+        world.DestroyBody(cat);
+
+        auto desiredCat = catBodies.find(IDandCat.first);
+        catBodies.erase(desiredCat);
+    }
+
+    deadCats.clear();
+}
+
+void World::playerHitByCat()
+{
+    //TODO: Do something?
 }

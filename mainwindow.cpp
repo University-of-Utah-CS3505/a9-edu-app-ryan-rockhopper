@@ -35,12 +35,15 @@ MainWindow::MainWindow(statsModel& model, QWidget *parent)
             this,
             &MainWindow::updateStatValues);
 
-    //TODO: Remove this entire button later. It is only as a manual way to "lose" the game.
-    connect(ui->gameOverButton,
-            &QPushButton::clicked,
+    //When the player is hit by a mouse, call processDeath in model
+    connect(&ui->gameplayArea->listener,
+            &GameCollisionListener::catHitsMouse,
+            &model,
+            &statsModel::processDeath);
+    connect(&model,
+            &statsModel::deathScreen,
             this,
             &MainWindow::gameOverScreen);
-
     connect(&model,
             &statsModel::updateCatSpawnMaxWait,
             ui->gameplayArea,
@@ -76,8 +79,12 @@ void MainWindow::mainScreen()
     ui->mainScreen      ->show();
 }
 
-void MainWindow::gameOverScreen()
+void MainWindow::gameOverScreen(int catsDodged, string timeAlive, string timeSincePopUp, int popUpsClosed, int maxLevel)
 {
+    //TODO: Pass these stats into the game over screen so the player can see
+    //TODO: Add some stats about distracted driving and how it relates
+    //TODO: Add a Qimage to the game over screen?
+    //TODO: Delete the game over button
     ui->startUpScreen   ->setEnabled(false);
     ui->mainScreen      ->setEnabled(false);
     ui->startUpScreen   ->hide();
