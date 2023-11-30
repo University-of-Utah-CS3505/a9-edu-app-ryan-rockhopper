@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QString>
-#include <QScreen>
 
 
 MainWindow::MainWindow(statsModel& model, QWidget *parent)
@@ -25,6 +24,10 @@ MainWindow::MainWindow(statsModel& model, QWidget *parent)
             &statsModel::drawPopUp,
             this,
             &MainWindow::placePopUp);
+    connect(this,
+            &MainWindow::spawnStringMatcher,
+            &distractionWindow2,
+            &StringMatcherPopup::changeText);
 
     //Update stats in main screen every second
     connect(&model,
@@ -88,14 +91,19 @@ void MainWindow::gameOverScreen()
 //TODO: Pop up appears on my (Ryan) second monitor and not within game window DEBUG
 void MainWindow::placePopUp()
 {
-    QScreen *screen = QGuiApplication::primaryScreen();
-    QRect  screenGeometry = screen->geometry();
     // 950x693 is the game screen size so it appears within the game screen always, also make a signal in model to do this and add timer.
     int xPosition = rand() % 950;
     int yPosition = rand() % 693;
     distractionWindow.setGeometry(xPosition, yPosition, 400, 300);
     distractionWindow.setWindowFlags(Qt::FramelessWindowHint);
     distractionWindow.show();
+
+    int xPosition2 = rand() % 950;
+    int yPosition2 = rand() % 693;
+    distractionWindow2.setGeometry(xPosition2, yPosition2, 620, 238);
+    distractionWindow2.setWindowFlags(Qt::FramelessWindowHint);
+    distractionWindow2.show();
+    emit spawnStringMatcher();
 }
 
 void MainWindow::updateStatValues(int catsDodged, string timeAlive, int popUpsClosed, int currentLevel)
