@@ -75,9 +75,9 @@ World::World(QWidget *parent) : QWidget(parent),
 void World::paintEvent(QPaintEvent *) {
     QPainter painter(this);
     b2Vec2 position = mouseBody->GetPosition();
-    float angle = mouseBody->GetAngle();
 
-//    qDebug() << position.x << "," << position.y;//, angle);
+    QPixmap background(":/grass_template.png");
+    painter.drawPixmap(0, 0, width, height, background);
     painter.drawImage(position.x - 25.0f, position.y - 25.0f, mouseImg);
     for(b2Body* body : catBodies)
     {
@@ -91,8 +91,8 @@ void World::paintEvent(QPaintEvent *) {
     pen.setWidth(penWidth);
     painter.setPen(pen);
     QRect paintingFrame(0, 0, width, height);
-    painter.drawRect(paintingFrame);
 
+    painter.drawRect(paintingFrame);
     painter.end();
 }
 
