@@ -3,7 +3,7 @@
 #include <QDebug>
 
 World::World(QWidget *parent) : QWidget(parent),
-    world(b2Vec2(0.0f, 20.0f)),//b2Vec2(0.0f, 10.0f)),
+    world(b2Vec2(0.0f, 15.0f)),//b2Vec2(0.0f, 10.0f)),
     worldCycle(this),
     mouseImg(":/mouse.png"),
     catImg(":/cat.png")
@@ -64,8 +64,8 @@ World::World(QWidget *parent) : QWidget(parent),
     // Set the box density to be non-zero, so it will be dynamic.
     fixtureDef.density = 1.0f;
     // Override the default friction.
-    fixtureDef.friction = 8.0f;
-    fixtureDef.restitution = 0.9;
+    fixtureDef.friction = 15.0f;
+    fixtureDef.restitution = 0.0f;
 
     // Add the shape to the body.
     mouseBody->CreateFixture(&fixtureDef);

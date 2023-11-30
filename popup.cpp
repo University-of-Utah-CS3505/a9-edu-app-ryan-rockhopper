@@ -15,6 +15,7 @@ PopUp::~PopUp()
 
 void PopUp::on_yesButton_clicked()
 {
+    ui->neutralFace->show();
     this->close();
 }
 

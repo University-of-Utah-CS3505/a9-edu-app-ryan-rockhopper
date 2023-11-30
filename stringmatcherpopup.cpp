@@ -15,7 +15,11 @@ StringMatcherPopup::~StringMatcherPopup()
 
 void StringMatcherPopup::on_lineEdit_textChanged()
 {
-    if (ui->label->text() == ui->lineEdit->text()) this->close();
+    if (ui->label->text() == ui->lineEdit->text())
+    {
+        this->close();
+        ui->lineEdit->clear();
+    }
 }
 
 void StringMatcherPopup::changeText()
