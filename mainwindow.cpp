@@ -91,19 +91,21 @@ void MainWindow::gameOverScreen()
 //TODO: Pop up appears on my (Ryan) second monitor and not within game window DEBUG
 void MainWindow::placePopUp()
 {
-    // 950x693 is the game screen size so it appears within the game screen always, also make a signal in model to do this and add timer.
-    int xPosition = rand() % 950;
-    int yPosition = rand() % 693;
-    distractionWindow.setGeometry(xPosition, yPosition, 400, 300);
-    distractionWindow.setWindowFlags(Qt::FramelessWindowHint);
-    distractionWindow.show();
-
-    int xPosition2 = rand() % 950;
-    int yPosition2 = rand() % 693;
-    distractionWindow2.setGeometry(xPosition2, yPosition2, 620, 238);
-    distractionWindow2.setWindowFlags(Qt::FramelessWindowHint);
-    distractionWindow2.show();
-    emit spawnStringMatcher();
+    if (rand() % 2 == 0) {
+        // 950x693 is the game screen size so it appears within the game screen always, also make a signal in model to do this and add timer.
+        int xPosition = rand() % 950;
+        int yPosition = rand() % 693;
+        distractionWindow.setGeometry(xPosition, yPosition, 400, 300);
+        distractionWindow.setWindowFlags(Qt::FramelessWindowHint);
+        distractionWindow.show();
+    } else {
+        int xPosition2 = rand() % 950;
+        int yPosition2 = rand() % 693;
+        distractionWindow2.setGeometry(xPosition2, yPosition2, 620, 238);
+        distractionWindow2.setWindowFlags(Qt::FramelessWindowHint);
+        distractionWindow2.show();
+        emit spawnStringMatcher();
+    }
 }
 
 void MainWindow::updateStatValues(int catsDodged, string timeAlive, int popUpsClosed, int currentLevel)

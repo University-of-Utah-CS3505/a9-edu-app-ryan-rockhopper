@@ -12,7 +12,16 @@ statsModel::statsModel(QObject *parent) : QObject{parent}
     popUpsClosed    = 0;
     catsDodged      = 0;
 
-    popUpFrequency  ->setInterval(5000);
+    currentPopUpFrequency   = 20000;
+    currentCatSpawnMaxWait  = 5000;
+
+    levelUpper->setInterval(thirtySeconds);
+    connect(levelUpper,
+            &QTimer::timeout,
+            this,
+            &statsModel::levelUp);
+
+    popUpFrequency  ->setInterval(currentPopUpFrequency);
     oneSecond       ->setInterval(1000);
 
     connect(popUpFrequency,
@@ -23,16 +32,6 @@ statsModel::statsModel(QObject *parent) : QObject{parent}
             &QTimer::timeout,
             this,
             &statsModel::calculateStats);
-
-    currentPopUpFrequency   = 20000;
-    currentCatSpawnMaxWait  = 5000;
-
-    qDebug() << "tet";
-    levelUpper->setInterval(thirtySeconds);
-    connect(levelUpper,
-            &QTimer::timeout,
-            this,
-            &statsModel::levelUp);
 }
 
 void statsModel::levelUp() {
@@ -84,6 +83,7 @@ void statsModel::calculateStats()
 
 void statsModel::generatePopUp()
 {
+    qDebug() << "generatingPopup";
     popUpToDeath.restart();
 
     emit drawPopUp();
