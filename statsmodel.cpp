@@ -1,5 +1,6 @@
 #include "statsmodel.h"
 #include <string>
+#include <QDebug>
 
 using std::string;
 using std::to_string;
@@ -11,7 +12,16 @@ statsModel::statsModel(QObject *parent) : QObject{parent}
     popUpsClosed    = 0;
     catsDodged      = 0;
 
-    popUpFrequency  ->setInterval(5000);
+    currentPopUpFrequency   = 10000;
+    currentCatSpawnMaxWait  = 5000;
+
+    levelUpper->setInterval(thirtySeconds);
+    connect(levelUpper,
+            &QTimer::timeout,
+            this,
+            &statsModel::levelUp);
+
+    popUpFrequency  ->setInterval(currentPopUpFrequency);
     oneSecond       ->setInterval(1000);
 
     connect(popUpFrequency,
@@ -32,8 +42,18 @@ void statsModel::processDeath()
     //game over, send to game over screen
     string finalTimeAlive           = millisecondsToMinAndSec(playTimeStopwatch.elapsed());
     string secondsSinceLastPopUp    = to_string(popUpToDeath.elapsed() / 1000);
+}
 
-    emit deathScreen(catsDodged, finalTimeAlive, secondsSinceLastPopUp, popUpsClosed, level);
+void statsModel::levelUp() 
+{
+    level++;
+
+    currentPopUpFrequency   = currentPopUpFrequency * 0.92f;
+    popUpFrequency->setInterval(currentPopUpFrequency);
+
+    currentCatSpawnMaxWait  = currentCatSpawnMaxWait * 0.8f;
+    emit updateCatSpawnMaxWait(currentCatSpawnMaxWait);
+    qDebug() << "Leveled up to:" << level << ". currentPopUpFrequency = " << currentPopUpFrequency << ". currentCatSpawnMaxWait = " << currentCatSpawnMaxWait;
 }
 
 void statsModel::startGame()
@@ -41,6 +61,16 @@ void statsModel::startGame()
     playTimeStopwatch.start();
     oneSecond       ->start();
     popUpFrequency  ->start();
+    levelUpper      ->start();
+}
+
+void statsModel::processDeath()
+{
+    //game over, send to game over screen
+    string finalTimeAlive           = millisecondsToMinAndSec(playTimeStopwatch.elapsed());
+    string secondsSinceLastPopUp    = to_string(popUpToDeath.elapsed() / 1000);
+
+    emit deathScreen(catsDodged, finalTimeAlive, secondsSinceLastPopUp, popUpsClosed, level);
 }
 
 void statsModel::updateCatsDodged()
@@ -59,14 +89,12 @@ void statsModel::calculateStats()
 {
     string timePlayedSoFar = millisecondsToMinAndSec(playTimeStopwatch.elapsed());
 
-    if(playTimeStopwatch.elapsed() % thirtySeconds < 1000) //Every 30 seconds with a margin of error of 1 second, update the game level.
-        setGameLevel();
-
     emit updateLabels(catsDodged, timePlayedSoFar, popUpsClosed, level);
 }
 
 void statsModel::generatePopUp()
 {
+    qDebug() << "generatingPopup";
     popUpToDeath.restart();
 
     emit drawPopUp();
@@ -89,36 +117,4 @@ string statsModel::millisecondsToMinAndSec(qint64 millisecondsElapsed)
 
     string minAndSec    = minuteString + ":" + secondString;
     return minAndSec;
-}
-
-void statsModel::setGameLevel()
-{
-    if(level == 5)
-        return;
-
-    if(playTimeStopwatch.elapsed() > twoMin)
-    {
-        level = 5;
-        popUpFrequency->setInterval(1000);
-    }
-    else if(playTimeStopwatch.elapsed() > oneMinThirtySeconds)
-    {
-        level = 4;
-        popUpFrequency->setInterval(2000);
-    }
-    else if(playTimeStopwatch.elapsed() > oneMin)
-    {
-        level = 3;
-        popUpFrequency->setInterval(3000);
-    }
-    else if(playTimeStopwatch.elapsed() > thirtySeconds)
-    {
-        level = 2;
-        popUpFrequency->setInterval(4000);
-    }
-    else if(playTimeStopwatch.elapsed() < thirtySeconds)
-    {
-        level = 1;
-        popUpFrequency->setInterval(5000);
-    }
 }

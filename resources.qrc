@@ -4,5 +4,6 @@
         <file>mouse.png</file>
         <file>impressed.png</file>
         <file>not_impressed.png</file>
+        <file>grass_template.png</file>
     </qresource>
 </RCC>

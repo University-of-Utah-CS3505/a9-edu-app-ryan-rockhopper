@@ -8,7 +8,6 @@ World::World(QWidget *parent) : QWidget(parent),
     mouseImg(":/mouse.png"),
     catImg(":/cat.png")
 {
-
     QAction *panLeftShortcut = new QAction(this);
     panLeftShortcut->setShortcut(Qt::Key_Left);
     connect(panLeftShortcut,
@@ -25,7 +24,6 @@ World::World(QWidget *parent) : QWidget(parent),
             &World::moveRight);
     this->addAction(panRightShortcut);
 
-
     connect(&listener,
             &GameCollisionListener::catHitsFloor,
             this,
@@ -33,6 +31,7 @@ World::World(QWidget *parent) : QWidget(parent),
 
     width = 691.0f;
     height = 601.0f;
+      
     float xMidpoint = width / 2.0f;
     world.SetContactListener(&listener);
 
@@ -46,14 +45,14 @@ World::World(QWidget *parent) : QWidget(parent),
 
     // Define the ground box shape.
     b2PolygonShape groundBox;
-    groundBox.SetAsBox(width, 10.0f);
+    groundBox.SetAsBox(width * 4, 10.0f);
     groundBody->CreateFixture(&groundBox, 0.0f);
 
     // Define dynamic body. We set its position and call the body factory.
     b2BodyDef mouseBodyDef;
     mouseBodyDef.angularDamping = 1000; // keeps mouse from rotating and making collision weird
     mouseBodyDef.type = b2_dynamicBody;
-    mouseBodyDef.position.Set(xMidpoint, 561.0f);//0.0f, 4.0f);
+    mouseBodyDef.position.Set(xMidpoint, 561.0f);
     mouseBody = world.CreateBody(&mouseBodyDef);
     int mouseData = 1;
     mouseBody->SetUserData((void*)mouseData);
@@ -81,22 +80,12 @@ World::World(QWidget *parent) : QWidget(parent),
     SpawnNewCat();
 }
 
-void World::moveLeft() {
-    qDebug() << "left";
-    mouseBody->SetLinearVelocity(b2Vec2(-80,0));
-}
-
-void World::moveRight() {
-    qDebug() << "right";
-    mouseBody->SetLinearVelocity(b2Vec2(80,0));
-}
-
 void World::paintEvent(QPaintEvent *) {
     QPainter painter(this);
     b2Vec2 position = mouseBody->GetPosition();
-    float angle = mouseBody->GetAngle();
 
-//    qDebug() << position.x << "," << position.y;//, angle);
+    QPixmap background(":/grass_template.png");
+    painter.drawPixmap(0, 0, width, height, background);
     painter.drawImage(position.x - 25.0f, position.y - 25.0f, mouseImg);
     for(auto pair : catBodies)
     {
@@ -110,8 +99,8 @@ void World::paintEvent(QPaintEvent *) {
     pen.setWidth(penWidth);
     painter.setPen(pen);
     QRect paintingFrame(0, 0, width, height);
-    painter.drawRect(paintingFrame);
 
+    painter.drawRect(paintingFrame);
     painter.end();
 }
 
@@ -122,12 +111,33 @@ void World::updateWorld() {
     deleteCats();
 }
 
+void World::moveLeft()
+{
+    if (mouseBody->GetPosition().x > 0)
+        mouseBody->SetLinearVelocity(b2Vec2(-80,0));
+    else
+        mouseBody->SetLinearVelocity(b2Vec2(0,0));
+}
+
+void World::moveRight()
+{
+    if (mouseBody->GetPosition().x < width)
+        mouseBody->SetLinearVelocity(b2Vec2(80,0));
+    else
+        mouseBody->SetLinearVelocity(b2Vec2(0,0));
+}
+
+void World::setCatSpawnMaxWait(int newMax)
+{
+    catSpawnMaxWait = newMax;
+}
+
 void World::SpawnNewCat()
 {
     b2BodyDef catBodyDef;
     catBodyDef.angularDamping = 1000; //this keeps the cat from rotating and making the collision weird
     catBodyDef.type = b2_dynamicBody;
-    catBodyDef.position.Set(rand() % (int)width, -80.0f);//0.0f, 4.0f);
+    catBodyDef.position.Set(rand() % (int)width, -80.0f);
     b2Body* cat = world.CreateBody(&catBodyDef);
     cat->SetUserData((void*) catData);
 
@@ -135,7 +145,6 @@ void World::SpawnNewCat()
     dynamicBox.SetAsBox(41.0f, 50.0f);
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &dynamicBox;
-
 
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;

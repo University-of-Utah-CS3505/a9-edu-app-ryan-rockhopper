@@ -60,6 +60,7 @@ SOURCES += \
     mainwindow.cpp \
     popup.cpp \
     statsmodel.cpp \
+    stringmatcherpopup.cpp \
     world.cpp
 
 HEADERS += \
@@ -114,11 +115,13 @@ HEADERS += \
     mainwindow.h \
     popup.h \
     statsmodel.h \
+    stringmatcherpopup.h \
     world.h
 
 FORMS += \
     mainwindow.ui \
-    popup.ui
+    popup.ui \
+    stringmatcherpopup.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

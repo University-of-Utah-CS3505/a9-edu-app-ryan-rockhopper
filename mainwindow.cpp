@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QString>
-#include <QScreen>
 
 
 MainWindow::MainWindow(statsModel& model, QWidget *parent)
@@ -25,13 +24,16 @@ MainWindow::MainWindow(statsModel& model, QWidget *parent)
             &statsModel::drawPopUp,
             this,
             &MainWindow::placePopUp);
+    connect(this,
+            &MainWindow::spawnStringMatcher,
+            &distractionWindow2,
+            &StringMatcherPopup::changeText);
 
     //Update stats in main screen every second
     connect(&model,
             &statsModel::updateLabels,
             this,
             &MainWindow::updateStatValues);
-
 
     //When the player is hit by a mouse, call processDeath in model
     connect(&ui->gameplayArea->listener,
@@ -42,16 +44,10 @@ MainWindow::MainWindow(statsModel& model, QWidget *parent)
             &statsModel::deathScreen,
             this,
             &MainWindow::gameOverScreen);
-
-
-
-
-
-    //TODO: Remove this entire button later. It is only as a manual way to "lose" the game.
-    /*connect(ui->gameOverButton,
-            &QPushButton::clicked,
-            this,
-            &MainWindow::gameOverScreen);*/
+    connect(&model,
+            &statsModel::updateCatSpawnMaxWait,
+            ui->gameplayArea,
+            &World::setCatSpawnMaxWait);
 
     startupScreen();
 }
@@ -102,14 +98,21 @@ void MainWindow::gameOverScreen(int catsDodged, string timeAlive, string timeSin
 //TODO: Pop up appears on my (Ryan) second monitor and not within game window DEBUG
 void MainWindow::placePopUp()
 {
-    QScreen *screen = QGuiApplication::primaryScreen();
-    QRect  screenGeometry = screen->geometry();
-    // 950x693 is the game screen size so it appears within the game screen always, also make a signal in model to do this and add timer.
-    int xPosition = rand() % 950;
-    int yPosition = rand() % 693;
-    distractionWindow.setGeometry(xPosition, yPosition, 400, 300);
-    distractionWindow.setWindowFlags(Qt::FramelessWindowHint);
-    distractionWindow.show();
+    if (rand() % 2 == 0) {
+        // 950x693 is the game screen size so it appears within the game screen always, also make a signal in model to do this and add timer.
+        int xPosition = rand() % 950;
+        int yPosition = rand() % 693;
+        distractionWindow.setGeometry(xPosition, yPosition, 400, 300);
+        distractionWindow.setWindowFlags(Qt::FramelessWindowHint);
+        distractionWindow.show();
+    } else {
+        int xPosition2 = rand() % 950;
+        int yPosition2 = rand() % 693;
+        distractionWindow2.setGeometry(xPosition2, yPosition2, 620, 238);
+        distractionWindow2.setWindowFlags(Qt::FramelessWindowHint);
+        distractionWindow2.show();
+        emit spawnStringMatcher();
+    }
 }
 
 void MainWindow::updateStatValues(int catsDodged, string timeAlive, int popUpsClosed, int currentLevel)
