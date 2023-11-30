@@ -49,6 +49,12 @@ MainWindow::MainWindow(statsModel& model, QWidget *parent)
             ui->gameplayArea,
             &World::setCatSpawnMaxWait);
 
+    //Update cats dodged
+    connect(&ui->gameplayArea->listener,
+            &GameCollisionListener::catHitsFloor,
+            &model,
+            &statsModel::updateCatsDodged);
+
     startupScreen();
 }
 
