@@ -38,6 +38,7 @@ public slots:
 private:
     const float width = 691.0f;
     const float height = 601.0f;
+    bool gameStarted = false;
     
     b2World world;
     qint64 catData = 2;

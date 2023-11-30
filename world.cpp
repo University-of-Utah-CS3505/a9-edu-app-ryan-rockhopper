@@ -28,9 +28,6 @@ World::World(QWidget *parent) : QWidget(parent),
             &GameCollisionListener::catHitsFloor,
             this,
             &World::markCatsForDeath);
-
-    width = 691.0f;
-    height = 601.0f;
       
     float xMidpoint = width / 2.0f;
     world.SetContactListener(&listener);
@@ -130,29 +127,33 @@ void World::moveRight()
 void World::setCatSpawnMaxWait(int newMax)
 {
     catSpawnMaxWait = newMax;
+    gameStarted = true;
 }
 
 void World::SpawnNewCat()
 {
-    b2BodyDef catBodyDef;
-    catBodyDef.angularDamping = 1000; //this keeps the cat from rotating and making the collision weird
-    catBodyDef.type = b2_dynamicBody;
-    catBodyDef.position.Set(rand() % (int)width, -80.0f);
-    b2Body* cat = world.CreateBody(&catBodyDef);
-    cat->SetUserData((void*) catData);
+    if (gameStarted)
+    {
+        b2BodyDef catBodyDef;
+        catBodyDef.angularDamping = 1000; //this keeps the cat from rotating and making the collision weird
+        catBodyDef.type = b2_dynamicBody;
+        catBodyDef.position.Set(rand() % (int)width, -80.0f);
+        b2Body* cat = world.CreateBody(&catBodyDef);
+        cat->SetUserData((void*) catData);
 
-    b2PolygonShape dynamicBox;
-    dynamicBox.SetAsBox(41.0f, 50.0f);
-    b2FixtureDef fixtureDef;
-    fixtureDef.shape = &dynamicBox;
+        b2PolygonShape dynamicBox;
+        dynamicBox.SetAsBox(41.0f, 50.0f);
+        b2FixtureDef fixtureDef;
+        fixtureDef.shape = &dynamicBox;
 
-    fixtureDef.density = 1.0f;
-    fixtureDef.friction = 0.3f;
-    fixtureDef.restitution = 0.9;
-    cat->CreateFixture(&fixtureDef);
-    catBodies.insert(std::pair<qint64, b2Body*>(catData, cat));
+        fixtureDef.density = 1.0f;
+        fixtureDef.friction = 0.3f;
+        fixtureDef.restitution = 0.9;
+        cat->CreateFixture(&fixtureDef);
+        catBodies.insert(std::pair<qint64, b2Body*>(catData, cat));
+        catData++;
+    }
     QTimer::singleShot(rand() % catSpawnMaxWait, Qt::PreciseTimer, this, [this](){SpawnNewCat();});
-    catData++;
 }
 
 void World::markCatsForDeath(qint64 catID)

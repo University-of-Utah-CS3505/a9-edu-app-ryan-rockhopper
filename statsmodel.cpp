@@ -42,6 +42,8 @@ void statsModel::processDeath()
     //game over, send to game over screen
     string finalTimeAlive           = millisecondsToMinAndSec(playTimeStopwatch.elapsed());
     string secondsSinceLastPopUp    = to_string(popUpToDeath.elapsed() / 1000);
+
+    emit deathScreen(catsDodged, finalTimeAlive, secondsSinceLastPopUp, popUpsClosed, level);
 }
 
 void statsModel::levelUp() 
@@ -58,19 +60,11 @@ void statsModel::levelUp()
 
 void statsModel::startGame()
 {
+    emit updateCatSpawnMaxWait(currentCatSpawnMaxWait);
     playTimeStopwatch.start();
     oneSecond       ->start();
     popUpFrequency  ->start();
     levelUpper      ->start();
-}
-
-void statsModel::processDeath()
-{
-    //game over, send to game over screen
-    string finalTimeAlive           = millisecondsToMinAndSec(playTimeStopwatch.elapsed());
-    string secondsSinceLastPopUp    = to_string(popUpToDeath.elapsed() / 1000);
-
-    emit deathScreen(catsDodged, finalTimeAlive, secondsSinceLastPopUp, popUpsClosed, level);
 }
 
 void statsModel::updateCatsDodged()
