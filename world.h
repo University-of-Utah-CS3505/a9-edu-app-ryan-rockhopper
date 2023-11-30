@@ -22,7 +22,7 @@ public slots:
     void updateWorld();
     void moveLeft();
     void moveRight();
-    void deleteCat(qint64 catID);
+    void markCatsForDeath(qint64 catID);
 
 private:
     float width;
@@ -37,9 +37,11 @@ private:
     b2Body* mouseBody;
     QImage mouseImg;
     map<qint64, b2Body*> catBodies;
+    map<qint64, b2Body*> deadCats;
     QImage catImg;
 
     void SpawnNewCat();
+    void deleteCats();
 };
 
 #endif // WORLD_H

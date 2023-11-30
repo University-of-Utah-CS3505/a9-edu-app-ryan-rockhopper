@@ -29,7 +29,7 @@ World::World(QWidget *parent) : QWidget(parent),
     connect(&listener,
             &GameCollisionListener::catHitsFloor,
             this,
-            &World::deleteCat);
+            &World::markCatsForDeath);
 
     width = 691.0f;
     height = 601.0f;
@@ -119,6 +119,7 @@ void World::updateWorld() {
     // It is generally best to keep the time step and iterations fixed.
     world.Step(1.0/60.0, 6, 2);
     update();
+    deleteCats();
 }
 
 void World::SpawnNewCat()
@@ -145,15 +146,31 @@ void World::SpawnNewCat()
     catData++;
 }
 
-void World::deleteCat(qint64 catID)
+void World::markCatsForDeath(qint64 catID)
 {
     b2Body* cat = catBodies[catID];
+    deadCats[catID] = cat;
 
-    if(cat)
+    /*if(cat)
     {
         world.DestroyBody(cat);
+        //qDebug() << "Deleted cat with cat id" + std::to_string(catID);
         cat = nullptr;
     }
-    //auto desiredCat = catBodies.find(catID);
-    //catBodies.erase(desiredCat);
+    auto desiredCat = catBodies.find(catID);
+    catBodies.erase(desiredCat);*/
+}
+
+void World::deleteCats()
+{
+    for(auto IDandCat : deadCats)
+    {
+        b2Body* cat = IDandCat.second;
+
+        world.DestroyBody(cat);
+        auto desiredCat = catBodies.find(IDandCat.first);
+        catBodies.erase(desiredCat);
+    }
+
+    deadCats.clear();
 }
