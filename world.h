@@ -57,6 +57,13 @@ private:
 
     /// @brief Deletes all cats that have been marked for deletion. Must be done outside the world step.
     void deleteCats();
+    vector<QPixmap> worldBackgrounds
+        {
+            QPixmap (":/grass_template.png"),
+            QPixmap (":/ice_template.png"), // lowers friction (ice lvl)
+            QPixmap (":/sand_template.png"), // increase friction (sand lvl)
+            QPixmap (":/bouncy_template.png") // increase bounciness/restitution (bouncy castle lvl)
+        };
 };
 
 #endif // WORLD_H

@@ -25,5 +25,5 @@ void StringMatcherPopup::on_lineEdit_textChanged()
 void StringMatcherPopup::changeText()
 {
     int randomIndex = rand() % words.size();
-    ui->label->setText(words[randomIndex]);
+    ui->label->setText(words.at(randomIndex));
 }

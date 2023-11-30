@@ -5,5 +5,8 @@
         <file>impressed.png</file>
         <file>not_impressed.png</file>
         <file>grass_template.png</file>
+        <file>ice_template.png</file>
+        <file>sand_template.png</file>
+        <file>bouncy_template.png</file>
     </qresource>
 </RCC>

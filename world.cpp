@@ -81,8 +81,7 @@ void World::paintEvent(QPaintEvent *) {
     QPainter painter(this);
     b2Vec2 position = mouseBody->GetPosition();
 
-    QPixmap background(":/grass_template.png");
-    painter.drawPixmap(0, 0, width, height, background);
+    painter.drawPixmap(0, 0, width, height, worldBackgrounds.at(0));
     painter.drawImage(position.x - 25.0f, position.y - 25.0f, mouseImg);
     for(auto pair : catBodies)
     {
