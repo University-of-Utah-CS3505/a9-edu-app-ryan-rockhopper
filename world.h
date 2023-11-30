@@ -16,18 +16,23 @@ class World : public QWidget
 public:
     explicit World(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *);
+    GameCollisionListener listener;
 signals:
 
 public slots:
     void updateWorld();
     void moveLeft();
     void moveRight();
+
+    /// @brief When a cat hits the ground, it is marked for deletion
+    /// @param catID is the identifier of the cat
     void markCatsForDeath(qint64 catID);
 
+    /// @brief The player has been hit by the cat, this begins the singal-slot sequence for game over
+    void playerHitByCat();
 private:
     float width;
     float height;
-    GameCollisionListener listener;
     b2World world;
     qint64 catData = 2;
 
@@ -41,6 +46,8 @@ private:
     QImage catImg;
 
     void SpawnNewCat();
+
+    /// @brief Deletes all cats that have been marked for deletion. Must be done outside the world step.
     void deleteCats();
 };
 

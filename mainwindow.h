@@ -3,6 +3,7 @@
 
 #include "popup.h"
 #include "statsmodel.h"
+#include "gamecollisionlistener.h"
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -41,6 +42,6 @@ private:
     void mainScreen();
 
     /// @brief Changes the view to display the game over screen when the player has lost.
-    void gameOverScreen();
+    void gameOverScreen(int catsDodged, string timeAlive, string timeSincePopUp, int popUpsClosed, int maxLevel);
 };
 #endif // MAINWINDOW_H

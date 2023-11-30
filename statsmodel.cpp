@@ -26,6 +26,9 @@ statsModel::statsModel(QObject *parent) : QObject{parent}
 
 void statsModel::processDeath()
 {
+    popUpFrequency  ->stop();
+    oneSecond       ->stop();
+
     //game over, send to game over screen
     string finalTimeAlive           = millisecondsToMinAndSec(playTimeStopwatch.elapsed());
     string secondsSinceLastPopUp    = to_string(popUpToDeath.elapsed() / 1000);

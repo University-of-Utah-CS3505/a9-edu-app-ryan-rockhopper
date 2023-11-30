@@ -150,15 +150,6 @@ void World::markCatsForDeath(qint64 catID)
 {
     b2Body* cat = catBodies[catID];
     deadCats[catID] = cat;
-
-    /*if(cat)
-    {
-        world.DestroyBody(cat);
-        //qDebug() << "Deleted cat with cat id" + std::to_string(catID);
-        cat = nullptr;
-    }
-    auto desiredCat = catBodies.find(catID);
-    catBodies.erase(desiredCat);*/
 }
 
 void World::deleteCats()
@@ -168,9 +159,15 @@ void World::deleteCats()
         b2Body* cat = IDandCat.second;
 
         world.DestroyBody(cat);
+
         auto desiredCat = catBodies.find(IDandCat.first);
         catBodies.erase(desiredCat);
     }
 
     deadCats.clear();
+}
+
+void World::playerHitByCat()
+{
+    //TODO: Do something?
 }
