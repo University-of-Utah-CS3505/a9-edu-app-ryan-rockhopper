@@ -135,10 +135,15 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
 
 void MainWindow::gameOverScreen(int catsDodged, string timeAlive, string timeSincePopUp, int popUpsClosed, int maxLevel)
 {
-    //TODO: Pass these stats into the game over screen so the player can see
-    //TODO: Add some stats about distracted driving and how it relates
-    //TODO: Add a Qimage to the game over screen?
-    //TODO: Delete the game over button
+    if(!ui->gameOverScreen->isEnabled())
+    {
+        string statsString = "";
+        ui->gameStats->setText("You dodged " + QString::number(catsDodged) + " cats. \n" +
+                               "You lasted " + QString::fromStdString(timeAlive) + "\n" +
+                               "You died " + QString::fromStdString(timeSincePopUp) + " seconds after the last pop-up\n" +
+                               "You got through " + QString::number(popUpsClosed) + " pop-ups\n" +
+                               "You made it to level " + QString::number(maxLevel));
+    }
     ui->startUpScreen   ->setEnabled(false);
     ui->mainScreen      ->setEnabled(false);
     ui->startUpScreen   ->hide();
@@ -151,7 +156,8 @@ void MainWindow::gameOverScreen(int catsDodged, string timeAlive, string timeSin
 
 void MainWindow::placePopUp()
 {
-    if (rand() % 2 == 0) {
+    if (rand() % 2 == 0)
+    {
         // 950x693 is the game screen size, take the popup width and height to get the maximum x or y the top left corner of the pop can be, and still be on screen
         distractionWindow.setWindowFlags(Qt::FramelessWindowHint);
         distractionWindow.setWindowModality(Qt::ApplicationModal);
@@ -162,7 +168,9 @@ void MainWindow::placePopUp()
         QPoint position = mapToGlobal(QPoint(xPosition,yPosition));
         distractionWindow.setGeometry(position.x(), position.y(), 400, 300);
         emit leftKeyReleased();
-    } else {
+    }
+    else
+    {
 
         distractionWindow2.setWindowFlags(Qt::FramelessWindowHint);
         distractionWindow2.setWindowModality(Qt::ApplicationModal);

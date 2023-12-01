@@ -38,8 +38,14 @@ void statsModel::processDeath()
     oneSecond       ->stop();
     levelUpper      ->stop();
     //game over, send to game over screen
+
     string finalTimeAlive           = millisecondsToMinAndSec(playTimeStopwatch.elapsed());
-    string secondsSinceLastPopUp    = to_string(popUpToDeath.elapsed() / 1000);
+    string secondsSinceLastPopUp    = "0";
+    if(popUpToDeath.elapsed() > 0)
+    {
+        secondsSinceLastPopUp = to_string(popUpToDeath.elapsed() / 1000);
+    }
+
 
     emit deathScreen(catsDodged, finalTimeAlive, secondsSinceLastPopUp, popUpsClosed, level);
 }
