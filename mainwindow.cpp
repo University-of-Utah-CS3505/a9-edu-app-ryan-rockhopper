@@ -177,9 +177,9 @@ void MainWindow::placePopUp()
         distractionWindow2.show();
         distractionWindow2.windowHandle()->setScreen(app->screenAt(this->mapToGlobal(QPoint(this->width()/2, 0))));
         int xPosition = rand() % 330;
-        int yPosition = rand() % 273;
+        int yPosition = rand() % 373;
         QPoint position = mapToGlobal(QPoint(xPosition,yPosition));
-        distractionWindow2.setGeometry(position.x(), position.y(), 620, 420);
+        distractionWindow2.setGeometry(position.x(), position.y(), 620, 300);
         emit spawnStringMatcher();
         emit leftKeyReleased();
     }

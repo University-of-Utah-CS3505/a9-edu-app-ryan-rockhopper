@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>620</width>
-    <height>238</height>
+    <height>300</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -25,8 +25,8 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>10</y>
+     <x>0</x>
+     <y>90</y>
      <width>301</width>
      <height>101</height>
     </rect>
@@ -39,6 +39,9 @@ color: rgb(0, 0, 0);</string>
    <property name="text">
     <string>Sample Text to Match</string>
    </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
    </property>
@@ -46,8 +49,8 @@ color: rgb(0, 0, 0);</string>
   <widget class="QLineEdit" name="lineEdit">
    <property name="geometry">
     <rect>
-     <x>290</x>
-     <y>130</y>
+     <x>300</x>
+     <y>200</y>
      <width>311</width>
      <height>91</height>
     </rect>
@@ -56,6 +59,43 @@ color: rgb(0, 0, 0);</string>
     <string notr="true">background: rgb(85, 170, 255);
 font: 700 20pt &quot;Segoe UI&quot;;
 color: rgb(0, 0, 0);</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="instructionsText">
+   <property name="geometry">
+    <rect>
+     <x>18</x>
+     <y>15</y>
+     <width>581</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Segoe UI</family>
+     <pointsize>20</pointsize>
+     <italic>false</italic>
+     <bold>true</bold>
+     <stylestrategy>NoAntialias</stylestrategy>
+     <kerning>true</kerning>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+font: 700 20pt &quot;Segoe UI&quot;;
+color: rgb(0, 0, 0);</string>
+   </property>
+   <property name="text">
+    <string>Repeat The Word!</string>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="textInteractionFlags">
+    <set>Qt::NoTextInteraction</set>
    </property>
   </widget>
  </widget>
