@@ -8,22 +8,6 @@ World::World(QWidget *parent) : QWidget(parent),
     mouseImg(":/mouse.png"),
     catImg(":/cat.png")
 {
-    QAction *panLeftShortcut = new QAction(this);
-    panLeftShortcut->setShortcut(Qt::Key_Left);
-    connect(panLeftShortcut,
-            &QAction::triggered,
-            this,
-            &World::moveLeft);
-    this->addAction(panLeftShortcut);
-
-    QAction *panRightShortcut = new QAction(this);
-    panRightShortcut->setShortcut(Qt::Key_Right);
-    connect(panRightShortcut,
-            &QAction::triggered,
-            this,
-            &World::moveRight);
-    this->addAction(panRightShortcut);
-
     connect(&listener,
             &GameCollisionListener::catHitsFloor,
             this,
@@ -64,7 +48,7 @@ World::World(QWidget *parent) : QWidget(parent),
     // Set the box density to be non-zero, so it will be dynamic.
     fixtureDef.density = 1.0f;
     // Override the default friction.
-    fixtureDef.friction = 15.0f;
+    fixtureDef.friction = 0.0f;
     fixtureDef.restitution = 0.0f;
 
     // Add the shape to the body.
@@ -112,7 +96,7 @@ void World::moveLeft()
     if (mouseBody->GetPosition().x > 0)
         mouseBody->SetLinearVelocity(b2Vec2(-80,0));
     else
-        mouseBody->SetLinearVelocity(b2Vec2(0,0));
+       stopMove();
 }
 
 void World::moveRight()
@@ -120,7 +104,12 @@ void World::moveRight()
     if (mouseBody->GetPosition().x < width)
         mouseBody->SetLinearVelocity(b2Vec2(80,0));
     else
-        mouseBody->SetLinearVelocity(b2Vec2(0,0));
+        stopMove();
+}
+
+void World::stopMove()
+{
+    mouseBody->SetLinearVelocity(b2Vec2(0,0));
 }
 
 void World::setCatSpawnMaxWait(int newMax)

@@ -6,6 +6,7 @@
 #include "statsmodel.h"
 #include "gamecollisionlistener.h"
 #include <QMainWindow>
+#include <QKeyEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -32,12 +33,18 @@ public slots:
 
 signals:
     void spawnStringMatcher();
+    void rightKeyPressed();
+    void rightKeyReleased();
+    void leftKeyPressed();
+    void leftKeyReleased();
 
 private:
     Ui::MainWindow *ui;
     PopUp distractionWindow;
     StringMatcherPopup distractionWindow2;
 
+    virtual void keyPressEvent(QKeyEvent *event);
+    virtual void keyReleaseEvent(QKeyEvent * event);
     /// @brief Displays the start up screen when the application begins.
     void startupScreen();
 

@@ -55,6 +55,24 @@ MainWindow::MainWindow(statsModel& model, QWidget *parent)
             &model,
             &statsModel::updateCatsDodged);
 
+    connect(this,
+            &MainWindow::rightKeyPressed,
+            ui->gameplayArea,
+            &World::moveRight);
+    connect(this,
+            &MainWindow::rightKeyReleased,
+            ui->gameplayArea,
+            &World::stopMove);
+    connect(this,
+            &MainWindow::leftKeyPressed,
+            ui->gameplayArea,
+            &World::moveLeft);
+    connect(this,
+            &MainWindow::leftKeyReleased,
+            ui->gameplayArea,
+            &World::stopMove);
+
+
     startupScreen();
 }
 
@@ -83,6 +101,30 @@ void MainWindow::mainScreen()
 
     ui->mainScreen      ->setEnabled(true);
     ui->mainScreen      ->show();
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    if(event->key() == Qt::Key_Right)
+    {
+        emit rightKeyPressed();
+    }
+    if(event->key() == Qt::Key_Left)
+    {
+        emit leftKeyPressed();
+    }
+}
+
+void MainWindow::keyReleaseEvent(QKeyEvent *event)
+{
+    if(event->key() == Qt::Key_Right)
+    {
+        emit rightKeyReleased();
+    }
+    if(event->key() == Qt::Key_Left)
+    {
+        emit leftKeyReleased();
+    }
 }
 
 void MainWindow::gameOverScreen(int catsDodged, string timeAlive, string timeSincePopUp, int popUpsClosed, int maxLevel)
