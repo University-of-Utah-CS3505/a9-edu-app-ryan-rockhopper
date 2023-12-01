@@ -18,6 +18,7 @@ void StringMatcherPopup::on_lineEdit_textChanged()
     if (ui->label->text() == ui->lineEdit->text())
     {
         this->close();
+        emit popupClosed();
         ui->lineEdit->clear();
     }
 }

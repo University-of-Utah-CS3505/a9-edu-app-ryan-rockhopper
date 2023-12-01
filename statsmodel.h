@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QTimer>
 #include <string>
+#include "popup.h"
+#include "stringmatcherpopup.h"
 
 using std::string;
 
@@ -49,7 +51,7 @@ private:
     int popUpsClosed;
     int level;
 
-    // time in millieseconds
+    // time in milliseconds
     int currentPopUpFrequency;
     int currentCatSpawnMaxWait;
 

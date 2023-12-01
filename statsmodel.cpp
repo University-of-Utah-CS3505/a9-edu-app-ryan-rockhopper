@@ -1,10 +1,8 @@
 #include "statsmodel.h"
-#include <string>
 #include <QDebug>
 
 using std::string;
 using std::to_string;
-
 
 statsModel::statsModel(QObject *parent) : QObject{parent}
 {
@@ -77,6 +75,7 @@ void statsModel::updatePopUpsClosed()
 {
     popUpsClosed++;
     calculateStats();
+    qDebug() << "slot called";
 }
 
 void statsModel::calculateStats()

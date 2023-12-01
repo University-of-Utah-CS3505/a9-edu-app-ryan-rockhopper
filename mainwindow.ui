@@ -254,13 +254,6 @@
         </property>
        </spacer>
       </item>
-      <item>
-       <widget class="QPushButton" name="gameOverButton">
-        <property name="text">
-         <string>FOR_TEST: game over</string>
-        </property>
-       </widget>
-      </item>
      </layout>
     </widget>
    </widget>

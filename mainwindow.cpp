@@ -70,7 +70,14 @@ MainWindow::MainWindow(statsModel& model, QApplication* app, QWidget *parent)
             &MainWindow::leftKeyReleased,
             ui->gameplayArea,
             &World::stopMove);
-
+    connect(&distractionWindow2,
+            &StringMatcherPopup::popupClosed,
+            &model,
+            &statsModel::updatePopUpsClosed);
+    connect(&distractionWindow,
+            &PopUp::popupClosed,
+            &model,
+            &statsModel::updatePopUpsClosed);
 
     startupScreen();
 }
@@ -136,29 +143,29 @@ void MainWindow::gameOverScreen(int catsDodged, string timeAlive, string timeSin
     ui->mainScreen      ->setEnabled(false);
     ui->startUpScreen   ->hide();
     ui->mainScreen      ->hide();
-
+    distractionWindow    .hide();
+    distractionWindow2   .hide();
     ui->gameOverScreen  ->setEnabled(true);
     ui->gameOverScreen  ->show();
 }
 
-//TODO: Create a stack (or vector or something) of pop-ups that are on screen. Right now generating a pop up gets rid of the old one even if it wasn't closed.
-//TODO: Pop up appears on my (Ryan)(and August!) second monitor and not within game window DEBUG
 void MainWindow::placePopUp()
 {
     if (rand() % 2 == 0) {
-        // 950x693 is the game screen size so it appears within the game screen always, also make a signal in model to do this and add timer.
+        // 950x693 is the game screen size, take the popup width and height to get the maximum x or y the top left corner of the pop can be, and still be on screen
         distractionWindow.setWindowFlags(Qt::FramelessWindowHint);
-
+        distractionWindow.setWindowModality(Qt::ApplicationModal);
         distractionWindow.show();
         distractionWindow.windowHandle()->setScreen(app->screenAt(this->mapToGlobal(QPoint(this->width()/2, 0))));
         int xPosition = rand() % 550;
         int yPosition = rand() % 393;
         QPoint position = mapToGlobal(QPoint(xPosition,yPosition));
         distractionWindow.setGeometry(position.x(), position.y(), 400, 300);
+        emit leftKeyReleased();
     } else {
 
         distractionWindow2.setWindowFlags(Qt::FramelessWindowHint);
-
+        distractionWindow2.setWindowModality(Qt::ApplicationModal);
         distractionWindow2.show();
         distractionWindow2.windowHandle()->setScreen(app->screenAt(this->mapToGlobal(QPoint(this->width()/2, 0))));
         int xPosition = rand() % 330;
@@ -166,6 +173,7 @@ void MainWindow::placePopUp()
         QPoint position = mapToGlobal(QPoint(xPosition,yPosition));
         distractionWindow2.setGeometry(position.x(), position.y(), 620, 420);
         emit spawnStringMatcher();
+        emit leftKeyReleased();
     }
 }
 

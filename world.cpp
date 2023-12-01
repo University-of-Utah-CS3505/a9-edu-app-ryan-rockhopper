@@ -93,18 +93,19 @@ void World::updateWorld() {
 
 void World::moveLeft()
 {
-    if (mouseBody->GetPosition().x > 0)
+    if (mouseBody->GetPosition().x > 20)
         mouseBody->SetLinearVelocity(b2Vec2(-80,0));
-    else
+    if(mouseBody->GetPosition().x <= 20)
        stopMove();
 }
 
 void World::moveRight()
 {
-    if (mouseBody->GetPosition().x < width)
+    if (mouseBody->GetPosition().x < width - 20)
         mouseBody->SetLinearVelocity(b2Vec2(80,0));
-    else
+    if(mouseBody->GetPosition().x >= width - 20)
         stopMove();
+
 }
 
 void World::stopMove()

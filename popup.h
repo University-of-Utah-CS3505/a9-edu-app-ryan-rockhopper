@@ -15,6 +15,8 @@ public:
     explicit PopUp(QWidget *parent = nullptr);
     ~PopUp();
 
+signals:
+    void popupClosed();
 private:
     Ui::PopUp *ui;
 

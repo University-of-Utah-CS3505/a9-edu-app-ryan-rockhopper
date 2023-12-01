@@ -17,9 +17,11 @@ void PopUp::on_yesButton_clicked()
 {
     ui->neutralFace->show();
     this->close();
+    emit popupClosed();
 }
 
 void PopUp::on_noButton_clicked()
 {
     ui->neutralFace->hide();
+
 }

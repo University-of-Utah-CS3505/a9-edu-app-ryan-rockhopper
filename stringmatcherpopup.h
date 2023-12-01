@@ -25,6 +25,9 @@ private:
         "Unbelievable"
     };
 
+signals:
+    void popupClosed();
+
 public slots:
     void on_lineEdit_textChanged();
     void changeText();
