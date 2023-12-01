@@ -7,6 +7,7 @@
 #include "gamecollisionlistener.h"
 #include <QMainWindow>
 #include <QKeyEvent>
+#include <QApplication>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,7 +18,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(statsModel& model, QWidget *parent = nullptr);
+    MainWindow(statsModel& model, QApplication* app, QWidget *parent = nullptr);
     ~MainWindow();
 
 public slots:
@@ -42,6 +43,7 @@ private:
     Ui::MainWindow *ui;
     PopUp distractionWindow;
     StringMatcherPopup distractionWindow2;
+    QApplication* app;
 
     virtual void keyPressEvent(QKeyEvent *event);
     virtual void keyReleaseEvent(QKeyEvent * event);

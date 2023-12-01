@@ -167,5 +167,5 @@ void World::deleteCats()
 
 void World::playerHitByCat()
 {
-    //TODO: Do something?
+    worldCycle.stop();
 }
