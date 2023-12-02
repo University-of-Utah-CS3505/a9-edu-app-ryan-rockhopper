@@ -4,8 +4,6 @@
 #include <QObject>
 #include <QTimer>
 #include <string>
-#include "popup.h"
-#include "stringmatcherpopup.h"
 
 using std::string;
 
@@ -20,6 +18,8 @@ signals:
     void deathScreen(int catsDodged, string timeAlive, string timeSincePopUp, int popUpsClosed, int maxLevel);
     void updateLabels(int catsDodged, string timeAlive, int popUpsClosed, int currentLevel);
     void updateCatSpawnMaxWait(int newMax);
+    void changeBackgroundAndEnemies();
+
 public slots:
     /// @brief Used to record final stats and send a signal to switch the view to the game over screen
     void processDeath();

@@ -65,7 +65,7 @@ void World::paintEvent(QPaintEvent *) {
     QPainter painter(this);
     b2Vec2 position = mouseBody->GetPosition();
 
-    painter.drawPixmap(0, 0, width, height, worldBackgrounds.at(0));
+    painter.drawPixmap(0, 0, width, height, currentBackground);
     painter.drawImage(position.x - 25.0f, position.y - 25.0f, mouseImg);
     for(auto pair : catBodies)
     {
@@ -84,7 +84,13 @@ void World::paintEvent(QPaintEvent *) {
     painter.end();
 }
 
-void World::updateWorld() {
+void World::levelUp()
+{
+    currentBackground = worldBackgrounds.at(rand() % worldBackgrounds.size());
+}
+
+void World::updateWorld()
+{
     // It is generally best to keep the time step and iterations fixed.
     world.Step(1.0/60.0, 6, 2);
     update();

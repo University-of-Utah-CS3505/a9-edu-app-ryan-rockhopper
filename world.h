@@ -30,6 +30,7 @@ public slots:
     void stopMove();
     /// @brief Sets our max spawn wait time.
     void setCatSpawnMaxWait(int newMax);
+    void levelUp();
 
     /// @brief When a cat hits the ground, it is marked for deletion
     /// @param catID is the identifier of the cat
@@ -59,6 +60,7 @@ private:
 
     /// @brief Deletes all cats that have been marked for deletion. Must be done outside the world step.
     void deleteCats();
+
     vector<QPixmap> worldBackgrounds
         {
             QPixmap (":/grass_template.png"),
@@ -66,6 +68,7 @@ private:
             QPixmap (":/sand_template.png"), // increase friction (sand lvl)
             QPixmap (":/bouncy_template.png") // increase bounciness/restitution (bouncy castle lvl)
         };
+    QPixmap currentBackground = worldBackgrounds.at(0);
 };
 
 #endif // WORLD_H
