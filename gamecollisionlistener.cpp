@@ -19,8 +19,3 @@ void GameCollisionListener::BeginContact(b2Contact* contact)
 
 }
 
-void GameCollisionListener::EndContact(b2Contact* contact)
-{
-
-}
-

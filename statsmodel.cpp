@@ -60,7 +60,7 @@ void statsModel::levelUp()
     currentCatSpawnMaxWait  = currentCatSpawnMaxWait * 0.8f;
     emit updateCatSpawnMaxWait(currentCatSpawnMaxWait);
     qDebug() << "Leveled up to:" << level << ". currentPopUpFrequency = " << currentPopUpFrequency << ". currentCatSpawnMaxWait = " << currentCatSpawnMaxWait;
-    emit changeBackgroundAndEnemies();
+    emit changeBackground();
 }
 
 void statsModel::startGame()

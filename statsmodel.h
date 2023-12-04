@@ -11,14 +11,29 @@ class statsModel : public QObject
 {
     Q_OBJECT
 public:
+
+    /// @brief This is the constructor for our stas model
     explicit statsModel(QObject *parent = nullptr);
 
 signals:
+    /// @brief This signal tells the window to display a pop-up
     void drawPopUp();
+    /// @brief This signal tells the main window to switch to the death screen, and passes in stats for it to display
+    /// @param catsDodged - The amount of cats the player dodged in the game
+    /// @param timeAlive - The length of time the player stayed alive as a string
+    /// @param timeSincePop-up - The length of time since the last pop-up appeared
+    /// @param maxLevel - the level that the player died on
     void deathScreen(int catsDodged, string timeAlive, string timeSincePopUp, int popUpsClosed, int maxLevel);
+    /// @brief This signal tells the main window to update the stas labels, and passes in stats for it to display
+    /// @param catsDodged - The amount of cats the player dodged in the game
+    /// @param timeAlive - The length of time the player stayed alive as a string
+    /// @param currentLevel - the level that the player is on
     void updateLabels(int catsDodged, string timeAlive, int popUpsClosed, int currentLevel);
+    /// @brief This changes the maximum amount of time the cat can take to spawn
+    /// @param newMax - new Maximum time
     void updateCatSpawnMaxWait(int newMax);
-    void changeBackgroundAndEnemies();
+    /// @brief This Signal changes the Background
+    void changeBackground();
 
 public slots:
     /// @brief Used to record final stats and send a signal to switch the view to the game over screen

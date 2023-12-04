@@ -48,7 +48,7 @@ MainWindow::MainWindow(statsModel& model, QApplication* app, QWidget *parent)
             ui->gameplayArea,
             &World::setCatSpawnMaxWait);
     connect(&model,
-            &statsModel::changeBackgroundAndEnemies,
+            &statsModel::changeBackground,
             ui->gameplayArea,
             &World::levelUp);
 

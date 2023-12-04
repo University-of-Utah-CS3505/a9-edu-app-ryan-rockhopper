@@ -18,7 +18,11 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    /// @brief this is the constructor for the MainWindow Object
+    /// @param model - this is the model object that goes with our game
+    /// @param app - This is the appplicatation that the Main window is a part of
     MainWindow(statsModel& model, QApplication* app, QWidget *parent = nullptr);
+    /// @brief This is the destructor for the MainWindow Object
     ~MainWindow();
 
 public slots:
@@ -33,10 +37,15 @@ public slots:
     void updateStatValues(int catsDodged, string timeAlive, int popUpsClosed, int currentLevel);
 
 signals:
+    /// @brief This signal tells the string matcher pop-up to clear out the text that was typed in it last time
     void spawnStringMatcher();
+    /// @brief This signal activates the move right event in world
     void rightKeyPressed();
+    /// @brief This signal activates the stop move right event in world
     void rightKeyReleased();
+    /// @brief This signal activates the move left event in world
     void leftKeyPressed();
+    /// @brief This signal activates the move left event in world
     void leftKeyReleased();
 
 private:
@@ -44,8 +53,11 @@ private:
     PopUp distractionWindow;
     StringMatcherPopup distractionWindow2;
     QApplication* app;
-
+    /// @brief This method overides the basic key press event
+    /// @param event - the QKeyEvent Object passed in
     virtual void keyPressEvent(QKeyEvent *event);
+    /// @brief This method overrides the basic key released event
+    /// @param event - The QKeyEvent Object pased in
     virtual void keyReleaseEvent(QKeyEvent * event);
     /// @brief Displays the start up screen when the application begins.
     void startupScreen();

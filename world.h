@@ -26,11 +26,13 @@ public slots:
     void moveLeft();
     /// @brief Moves the mouse to the right when right arrow is pressed.
     void moveRight();
-
+    /// @brief This stops the mouse from moving when the left arrow is released
     void stopMoveLeft();
+    /// @brief This stops the mouse from moving when the right arrow is released
     void stopMoveRight();
     /// @brief Sets our max spawn wait time.
     void setCatSpawnMaxWait(int newMax);
+    /// @brief this handles the logic of leveling up
     void levelUp();
 
     /// @brief When a cat hits the ground, it is marked for deletion
@@ -46,7 +48,7 @@ private:
     const float width = 691.0f;
     const float height = 601.0f;
     bool gameStarted = false;
-    bool applyBounce = true;
+    bool applyBounce = false;
     b2World world;
     qint64 catData = 2;
 
