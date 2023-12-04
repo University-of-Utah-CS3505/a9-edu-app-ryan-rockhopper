@@ -1,5 +1,4 @@
 #include "world.h"
-#include <QPainter>
 
 World::World(QWidget *parent) : QWidget(parent),
     world(b2Vec2(0.0f, 15.0f)),//b2Vec2(0.0f, 10.0f)),

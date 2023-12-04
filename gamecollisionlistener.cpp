@@ -1,5 +1,4 @@
 #include "gamecollisionlistener.h"
-#include <QDebug>
 GameCollisionListener::GameCollisionListener(QObject *parent) : QObject{parent}
 {
 

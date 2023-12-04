@@ -1,7 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QString>
-#include <QWindow>
 
 MainWindow::MainWindow(statsModel& model, QApplication* app, QWidget *parent)
     : QMainWindow(parent)

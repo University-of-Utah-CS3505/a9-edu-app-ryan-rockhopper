@@ -5,6 +5,7 @@
 #include <Box2D/Box2D.h>
 #include <QTimer>
 #include <map>
+#include <QPainter>
 #include "gamecollisionlistener.h"
 
 using std::map;

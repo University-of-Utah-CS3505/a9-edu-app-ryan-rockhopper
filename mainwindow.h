@@ -8,6 +8,8 @@
 #include <QMainWindow>
 #include <QKeyEvent>
 #include <QApplication>
+#include <QString>
+#include <QWindow>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
