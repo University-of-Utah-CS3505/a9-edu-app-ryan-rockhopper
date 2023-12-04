@@ -1,6 +1,5 @@
 #include "world.h"
 #include <QPainter>
-#include <QDebug>
 
 World::World(QWidget *parent) : QWidget(parent),
     world(b2Vec2(0.0f, 15.0f)),//b2Vec2(0.0f, 10.0f)),
@@ -16,11 +15,9 @@ World::World(QWidget *parent) : QWidget(parent),
     float xMidpoint = width / 2.0f;
     world.SetContactListener(&listener);
 
-    qDebug() << "set Listener";
+
     // Define the ground body.
     b2BodyDef groundBodyDef;
-//  b2Vec2 groundPosition(xMidpoint, parent->height());
-//  qDebug() << "groundPostion" << groundPosition.x << "," << groundPosition.y;
     groundBodyDef.position.Set(xMidpoint, height);
     b2Body* groundBody = world.CreateBody(&groundBodyDef);
 
@@ -37,7 +34,6 @@ World::World(QWidget *parent) : QWidget(parent),
     mouseBody = world.CreateBody(&mouseBodyDef);
     int mouseData = 1;
     mouseBody->SetUserData((void*)mouseData);
-    qDebug() << mouseBody->GetUserData();
     currentMoveVelocity = 120.0f;
     currentStopVelocity = 0.0f;
 
@@ -55,7 +51,6 @@ World::World(QWidget *parent) : QWidget(parent),
 
     // Add the shape to the body.
     mouseBody->CreateFixture(&fixtureDef);
-    qDebug() << "Init world";
 
     connect(&worldCycle, &QTimer::timeout, this, &World::updateWorld);
     worldCycle.start(10);
@@ -130,7 +125,6 @@ void World::updateWorld()
     {
         mouseBody->SetLinearVelocity(b2Vec2(0,0));
     }
-    qDebug() << mouseBody->GetPosition().y;
     if(applyBounce && mouseBody->GetPosition().y  > 565)
     {
         mouseBody->ApplyLinearImpulse(b2Vec2(0, -80 * mouseBody->GetMass()), mouseBody->GetPosition(), true );

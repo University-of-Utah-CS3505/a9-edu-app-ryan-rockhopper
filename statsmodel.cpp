@@ -1,5 +1,4 @@
 #include "statsmodel.h"
-#include <QDebug>
 
 using std::string;
 using std::to_string;
@@ -59,7 +58,6 @@ void statsModel::levelUp()
 
     currentCatSpawnMaxWait  = currentCatSpawnMaxWait * 0.8f;
     emit updateCatSpawnMaxWait(currentCatSpawnMaxWait);
-    qDebug() << "Leveled up to:" << level << ". currentPopUpFrequency = " << currentPopUpFrequency << ". currentCatSpawnMaxWait = " << currentCatSpawnMaxWait;
     emit changeBackground();
 }
 
@@ -82,7 +80,6 @@ void statsModel::updatePopUpsClosed()
 {
     popUpsClosed++;
     calculateStats();
-    qDebug() << "slot called";
 }
 
 void statsModel::calculateStats()
@@ -94,7 +91,6 @@ void statsModel::calculateStats()
 
 void statsModel::generatePopUp()
 {
-    qDebug() << "generatingPopup";
     popUpToDeath.restart();
 
     emit drawPopUp();
