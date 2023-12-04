@@ -330,7 +330,7 @@
           </property>
           <property name="minimumSize">
            <size>
-            <width>250</width>
+            <width>300</width>
             <height>100</height>
            </size>
           </property>
@@ -357,7 +357,7 @@
      <x>0</x>
      <y>0</y>
      <width>950</width>
-     <height>21</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>

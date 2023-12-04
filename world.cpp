@@ -19,8 +19,8 @@ World::World(QWidget *parent) : QWidget(parent),
     qDebug() << "set Listener";
     // Define the ground body.
     b2BodyDef groundBodyDef;
-//    b2Vec2 groundPosition(xMidpoint, parent->height());
-//    qDebug() << "groundPostion" << groundPosition.x << "," << groundPosition.y;
+//  b2Vec2 groundPosition(xMidpoint, parent->height());
+//  qDebug() << "groundPostion" << groundPosition.x << "," << groundPosition.y;
     groundBodyDef.position.Set(xMidpoint, height);
     b2Body* groundBody = world.CreateBody(&groundBodyDef);
 
@@ -38,6 +38,8 @@ World::World(QWidget *parent) : QWidget(parent),
     int mouseData = 1;
     mouseBody->SetUserData((void*)mouseData);
     qDebug() << mouseBody->GetUserData();
+    currentMoveVelocity = 120.0f;
+    currentStopVelocity = 0.0f;
 
     // Define another box shape for our dynamic body.
     b2PolygonShape dynamicBox;
@@ -86,7 +88,36 @@ void World::paintEvent(QPaintEvent *) {
 
 void World::levelUp()
 {
-    currentBackground = worldBackgrounds.at(rand() % worldBackgrounds.size());
+    int currentBackgroundIndex = rand() % worldBackgrounds.size();
+    changePhysics(currentBackgroundIndex);
+    currentBackground = worldBackgrounds.at(currentBackgroundIndex);
+}
+
+void World::changePhysics(int level)
+{
+    switch(level)
+    {
+        case 0: //0 is the grass level, and physics should be default
+           currentMoveVelocity = 120.0f;
+           currentStopVelocity = 0.0f;
+           applyBounce = false;
+           break;
+        case 1: //1 is the ice level, so we should slide around
+           currentMoveVelocity = 120.0f;
+           currentStopVelocity = 20.0f;
+           applyBounce = false;
+           break;
+        case 2: //2 is the desert level, so we should move slower
+           currentMoveVelocity = 80.0f;
+           currentStopVelocity = 0.0f;
+           applyBounce = false;
+           break;
+        case 3: //3 is the slime level so we
+           currentMoveVelocity = 120.0f;
+           currentStopVelocity = 0.0f;
+           applyBounce = true;
+           break;
+    }
 }
 
 void World::updateWorld()
@@ -95,28 +126,37 @@ void World::updateWorld()
     world.Step(1.0/60.0, 6, 2);
     update();
     deleteCats();
+    if(mouseBody->GetPosition().x > width - 20 || mouseBody->GetPosition().x < 20)
+    {
+        mouseBody->SetLinearVelocity(b2Vec2(0,0));
+    }
+    qDebug() << mouseBody->GetPosition().y;
+    if(applyBounce && mouseBody->GetPosition().y  > 565)
+    {
+        mouseBody->ApplyLinearImpulse(b2Vec2(0, -80 * mouseBody->GetMass()), mouseBody->GetPosition(), true );
+    }
 }
 
 void World::moveLeft()
 {
     if (mouseBody->GetPosition().x > 20)
-        mouseBody->SetLinearVelocity(b2Vec2(-80,0));
-    if(mouseBody->GetPosition().x <= 20)
-       stopMove();
+        mouseBody->SetLinearVelocity(b2Vec2(-currentMoveVelocity, mouseBody->GetLinearVelocity().y));
 }
 
 void World::moveRight()
 {
     if (mouseBody->GetPosition().x < width - 20)
-        mouseBody->SetLinearVelocity(b2Vec2(80,0));
-    if(mouseBody->GetPosition().x >= width - 20)
-        stopMove();
-
+        mouseBody->SetLinearVelocity(b2Vec2(currentMoveVelocity,mouseBody->GetLinearVelocity().y));
 }
 
-void World::stopMove()
+void World::stopMoveLeft()
 {
-    mouseBody->SetLinearVelocity(b2Vec2(0,0));
+    mouseBody->SetLinearVelocity(b2Vec2(-currentStopVelocity,mouseBody->GetLinearVelocity().y));
+}
+
+void World::stopMoveRight()
+{
+    mouseBody->SetLinearVelocity(b2Vec2(currentStopVelocity,mouseBody->GetLinearVelocity().y));
 }
 
 void World::setCatSpawnMaxWait(int newMax)
@@ -143,7 +183,7 @@ void World::SpawnNewCat()
 
         fixtureDef.density = 1.0f;
         fixtureDef.friction = 0.3f;
-        fixtureDef.restitution = 0.9;
+        fixtureDef.restitution = 1.0f;
         cat->CreateFixture(&fixtureDef);
         catBodies.insert(std::pair<qint64, b2Body*>(catData, cat));
         catData++;

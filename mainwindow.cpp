@@ -58,6 +58,7 @@ MainWindow::MainWindow(statsModel& model, QApplication* app, QWidget *parent)
             &model,
             &statsModel::updateCatsDodged);
 
+    //connect controls
     connect(this,
             &MainWindow::rightKeyPressed,
             ui->gameplayArea,
@@ -65,7 +66,7 @@ MainWindow::MainWindow(statsModel& model, QApplication* app, QWidget *parent)
     connect(this,
             &MainWindow::rightKeyReleased,
             ui->gameplayArea,
-            &World::stopMove);
+            &World::stopMoveRight);
     connect(this,
             &MainWindow::leftKeyPressed,
             ui->gameplayArea,
@@ -73,7 +74,9 @@ MainWindow::MainWindow(statsModel& model, QApplication* app, QWidget *parent)
     connect(this,
             &MainWindow::leftKeyReleased,
             ui->gameplayArea,
-            &World::stopMove);
+            &World::stopMoveLeft);
+
+    //connect pop-up closing
     connect(&distractionWindow2,
             &StringMatcherPopup::popupClosed,
             &model,

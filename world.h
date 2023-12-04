@@ -27,7 +27,8 @@ public slots:
     /// @brief Moves the mouse to the right when right arrow is pressed.
     void moveRight();
 
-    void stopMove();
+    void stopMoveLeft();
+    void stopMoveRight();
     /// @brief Sets our max spawn wait time.
     void setCatSpawnMaxWait(int newMax);
     void levelUp();
@@ -39,10 +40,13 @@ public slots:
     /// @brief The player has been hit by the cat, this begins the singal-slot sequence for game over
     void playerHitByCat();
 private:
+    float currentMoveVelocity;
+    float currentStopVelocity;
+    void changePhysics(int level);
     const float width = 691.0f;
     const float height = 601.0f;
     bool gameStarted = false;
-    
+    bool applyBounce = true;
     b2World world;
     qint64 catData = 2;
 
