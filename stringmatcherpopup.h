@@ -21,10 +21,25 @@ private:
     Ui::StringMatcherPopup *ui;
     std::vector<QString> words
     {
+        "hi",
+        "yo!",
         "hey",
-        "really",
+        "wow",
+        "sup!",
+        "Nope",
+        "wait.",
+        "Sorry",
+        "NoWay!",
+        "really?",
+        "Wassup?",
         "goodbye",
-        "Unbelievable"
+        "Surprise!",
+        "Fantastic",
+        "Incredible",
+        "Absolutely.",
+        "Unbelievable",
+        "Outstanding!",
+        "congratulations"
     };
 
 signals:

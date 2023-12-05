@@ -33,7 +33,7 @@ public slots:
     void stopMoveRight();
     /// @brief Sets our max spawn wait time.
     void setCatSpawnMaxWait(int newMax);
-    /// @brief this handles the logic of leveling up
+    /// @brief this handles the consequences of leveling up in the world
     void levelUp();
 
     /// @brief When a cat hits the ground, it is marked for deletion
