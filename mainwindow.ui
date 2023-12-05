@@ -22,7 +22,7 @@
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="startUpScreen" native="true">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="geometry">
      <rect>
@@ -75,6 +75,35 @@
         </property>
         <property name="wordWrap">
          <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="gameplayInstructions">
+        <property name="font">
+         <font>
+          <family>Droid Sans Fallback</family>
+          <pointsize>13</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Dodge the fallings cats by pressing the left or right arrow key. If you get hit by a cat, it is game over!</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -350,6 +379,9 @@
      </layout>
     </widget>
    </widget>
+   <zorder>mainScreen</zorder>
+   <zorder>gameOverScreen</zorder>
+   <zorder>startUpScreen</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -357,7 +389,7 @@
      <x>0</x>
      <y>0</y>
      <width>950</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
