@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "QMovie"
 
 MainWindow::MainWindow(statsModel& model, QApplication* app, QWidget *parent)
     : QMainWindow(parent)
@@ -153,6 +154,10 @@ void MainWindow::gameOverScreen(int catsDodged, string timeAlive, string timeSin
     distractionWindow2   .hide();
     ui->gameOverScreen  ->setEnabled(true);
     ui->gameOverScreen  ->show();
+
+    QMovie *movie = new QMovie(":/catDriving.gif");
+    ui->gameOverGif->setMovie(movie);
+    movie->start();
 }
 
 void MainWindow::placePopUp()

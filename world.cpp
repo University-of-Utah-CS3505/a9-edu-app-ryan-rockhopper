@@ -102,7 +102,7 @@ void World::changePhysics(int level)
            break;
         case 1: //1 is the ice level, so we should slide around
            currentMoveVelocity = 120.0f;
-           currentStopVelocity = 20.0f;
+           currentStopVelocity = 40.0f;
            applyBounce = false;
            break;
         case 2: //2 is the desert level, so we should move slower

@@ -281,6 +281,9 @@
      <layout class="QVBoxLayout" name="gameOverVerticalLayout">
       <item>
        <widget class="QLabel" name="gameOver">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="font">
          <font>
           <family>Gayathri</family>
@@ -349,6 +352,21 @@
       </item>
      </layout>
     </widget>
+    <widget class="QLabel" name="gameOverGif">
+     <property name="geometry">
+      <rect>
+       <x>305</x>
+       <y>360</y>
+       <width>641</width>
+       <height>231</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+    <zorder>gameOverGif</zorder>
+    <zorder>verticalLayoutWidget_3</zorder>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -357,7 +375,7 @@
      <x>0</x>
      <y>0</y>
      <width>950</width>
-     <height>23</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
