@@ -125,7 +125,7 @@ void World::updateWorld()
     deleteCats();
     if(mouseBody->GetPosition().x > width - 20 || mouseBody->GetPosition().x < 20)
     {
-        mouseBody->SetLinearVelocity(b2Vec2(0,0));
+        mouseBody->SetLinearVelocity(b2Vec2(0, mouseBody->GetLinearVelocity().y));
     }
     if(applyBounce && mouseBody->GetPosition().y  > 565)
     {
