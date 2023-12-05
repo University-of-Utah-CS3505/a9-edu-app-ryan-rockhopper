@@ -23,7 +23,7 @@ MainWindow::MainWindow(statsModel& model, QApplication* app, QWidget *parent)
             &MainWindow::placePopUp);
     connect(this,
             &MainWindow::spawnStringMatcher,
-            &distractionWindow2,
+            &textMessage,
             &StringMatcherPopup::changeText);
 
     //Update stats in main screen every second
@@ -71,11 +71,11 @@ MainWindow::MainWindow(statsModel& model, QApplication* app, QWidget *parent)
             &World::stopMoveLeft);
 
     //connect pop-up closing
-    connect(&distractionWindow2,
+    connect(&textMessage,
             &StringMatcherPopup::popupClosed,
             &model,
             &statsModel::updatePopUpsClosed);
-    connect(&distractionWindow,
+    connect(&davidPopUp,
             &PopUp::popupClosed,
             &model,
             &statsModel::updatePopUpsClosed);
@@ -149,8 +149,8 @@ void MainWindow::gameOverScreen(int catsDodged, string timeAlive, string timeSin
     ui->mainScreen      ->setEnabled(false);
     ui->startUpScreen   ->hide();
     ui->mainScreen      ->hide();
-    distractionWindow    .hide();
-    distractionWindow2   .hide();
+    davidPopUp    .hide();
+    textMessage   .hide();
     ui->gameOverScreen  ->setEnabled(true);
     ui->gameOverScreen  ->show();
 }
@@ -160,27 +160,26 @@ void MainWindow::placePopUp()
     if (rand() % 2 == 0)
     {
         // 950x693 is the game screen size, take the popup width and height to get the maximum x or y the top left corner of the pop can be, and still be on screen
-        distractionWindow.setWindowFlags(Qt::FramelessWindowHint);
-        distractionWindow.setWindowModality(Qt::ApplicationModal);
-        distractionWindow.show();
-        distractionWindow.windowHandle()->setScreen(app->screenAt(this->mapToGlobal(QPoint(this->width()/2, 0))));
-        int xPosition = rand() % 550;
+        davidPopUp.setWindowFlags(Qt::FramelessWindowHint);
+        davidPopUp.setWindowModality(Qt::ApplicationModal);
+        davidPopUp.show();
+        davidPopUp.windowHandle()->setScreen(app->screenAt(this->mapToGlobal(QPoint(this->width()/2, 0))));
+        int xPosition = rand() % 500;
         int yPosition = rand() % 393;
         QPoint position = mapToGlobal(QPoint(xPosition,yPosition));
-        distractionWindow.setGeometry(position.x(), position.y(), 400, 300);
+        davidPopUp.setGeometry(position.x(), position.y(), 450, 300);
         emit leftKeyReleased();
     }
     else
     {
-
-        distractionWindow2.setWindowFlags(Qt::FramelessWindowHint);
-        distractionWindow2.setWindowModality(Qt::ApplicationModal);
-        distractionWindow2.show();
-        distractionWindow2.windowHandle()->setScreen(app->screenAt(this->mapToGlobal(QPoint(this->width()/2, 0))));
+        textMessage.setWindowFlags(Qt::FramelessWindowHint);
+        textMessage.setWindowModality(Qt::ApplicationModal);
+        textMessage.show();
+        textMessage.windowHandle()->setScreen(app->screenAt(this->mapToGlobal(QPoint(this->width()/2, 0))));
         int xPosition = rand() % 330;
         int yPosition = rand() % 373;
         QPoint position = mapToGlobal(QPoint(xPosition,yPosition));
-        distractionWindow2.setGeometry(position.x(), position.y(), 620, 300);
+        textMessage.setGeometry(position.x(), position.y(), 620, 300);
         emit spawnStringMatcher();
         emit leftKeyReleased();
     }
