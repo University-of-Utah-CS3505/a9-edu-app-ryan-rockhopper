@@ -9,7 +9,7 @@ statsModel::statsModel(QObject *parent) : QObject{parent}
     popUpsClosed    = 0;
     catsDodged      = 0;
 
-    currentPopUpFrequency   = 15000;
+    currentPopUpFrequency   = 9000;
     currentCatSpawnMaxWait  = 5000;
 
     levelUpper->setInterval(thirtySeconds);
@@ -53,10 +53,10 @@ void statsModel::levelUp()
 {
     level++;
 
-    currentPopUpFrequency   = currentPopUpFrequency * 0.92f;
+    currentPopUpFrequency   = currentPopUpFrequency * 0.85f;
     popUpFrequency->setInterval(currentPopUpFrequency);
 
-    currentCatSpawnMaxWait  = currentCatSpawnMaxWait * 0.8f;
+    currentCatSpawnMaxWait  = currentCatSpawnMaxWait * 0.75f;
     emit tellWorldLevelUp(currentCatSpawnMaxWait);
 }
 
