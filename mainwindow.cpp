@@ -42,13 +42,9 @@ MainWindow::MainWindow(statsModel& model, QApplication* app, QWidget *parent)
             this,
             &MainWindow::gameOverScreen);
     connect(&model,
-            &statsModel::updateCatSpawnMaxWait,
+            &statsModel::tellWorldLevelUp,
             ui->gameplayArea,
-            &World::setCatSpawnMaxWait);
-    connect(&model,
-            &statsModel::changeBackground,
-            ui->gameplayArea,
-            &World::levelUp);
+            &World::levelUpWorld);
 
     //Update cats dodged
     connect(&ui->gameplayArea->listener,

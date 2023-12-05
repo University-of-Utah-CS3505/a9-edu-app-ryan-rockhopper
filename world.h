@@ -31,15 +31,14 @@ public slots:
     void stopMoveLeft();
     /// @brief This stops the mouse from moving when the right arrow is released
     void stopMoveRight();
-    /// @brief Sets our max spawn wait time.
-    void setCatSpawnMaxWait(int newMax);
+
     /// @brief this handles the consequences of leveling up in the world
-    void levelUp();
+    /// @param newMax - new Maximum time for a cat to spawn
+    void levelUpWorld(int newMaxCatWait);
 
     /// @brief When a cat hits the ground, it is marked for deletion
     /// @param catID is the identifier of the cat
     void markCatsForDeath(qint64 catID);
-
     /// @brief The player has been hit by the cat, this begins the singal-slot sequence for game over
     void playerHitByCat();
 private:

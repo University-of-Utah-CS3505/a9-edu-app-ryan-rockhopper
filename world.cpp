@@ -57,7 +57,8 @@ World::World(QWidget *parent) : QWidget(parent),
     SpawnNewCat();
 }
 
-void World::paintEvent(QPaintEvent *) {
+void World::paintEvent(QPaintEvent *)
+{
     QPainter painter(this);
     b2Vec2 position = mouseBody->GetPosition();
 
@@ -80,8 +81,11 @@ void World::paintEvent(QPaintEvent *) {
     painter.end();
 }
 
-void World::levelUp()
+void World::levelUpWorld(int newMaxCatWait)
 {
+    catSpawnMaxWait = newMaxCatWait;
+    gameStarted = true;
+
     int currentBackgroundIndex = rand() % worldBackgrounds.size();
     changePhysics(currentBackgroundIndex);
     currentBackground = worldBackgrounds.at(currentBackgroundIndex);
@@ -150,12 +154,6 @@ void World::stopMoveLeft()
 void World::stopMoveRight()
 {
     mouseBody->SetLinearVelocity(b2Vec2(currentStopVelocity,mouseBody->GetLinearVelocity().y));
-}
-
-void World::setCatSpawnMaxWait(int newMax)
-{
-    catSpawnMaxWait = newMax;
-    gameStarted = true;
 }
 
 void World::SpawnNewCat()

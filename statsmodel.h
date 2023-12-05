@@ -11,7 +11,6 @@ class statsModel : public QObject
 {
     Q_OBJECT
 public:
-
     /// @brief This is the constructor for our stas model
     explicit statsModel(QObject *parent = nullptr);
 
@@ -29,24 +28,15 @@ signals:
     /// @param timeAlive - The length of time the player stayed alive as a string
     /// @param currentLevel - the level that the player is on
     void updateLabels(int catsDodged, string timeAlive, int popUpsClosed, int currentLevel);
-    /// @brief This changes the maximum amount of time the cat can take to spawn
-    /// @param newMax - new Maximum time
-    void updateCatSpawnMaxWait(int newMax);
-    /// @brief This Signal changes the Background
-    void changeBackground();
+    /// @brief This changes the maximum amount of time the cat can take to spawn, and tells the World to change level
+    /// @param newMax - new Maximum time for a cat to spawn
+    void tellWorldLevelUp(int newMaxCatWait);
 
 public slots:
-    /// @brief Used to record final stats and send a signal to switch the view to the game over screen
-    void processDeath();
-
     /// @brief Starts the timer to track play time
     void startGame();
-
-    /// @brief Increments catsDodged every time the player dodges a cat
-    void updateCatsDodged();
-
-    /// @brief Incremements popUpsClosed every time the player closes a pop up
-    void updatePopUpsClosed();
+    /// @brief Used to record final stats and send a signal to switch the view to the game over screen
+    void processDeath();
 
     /// @brief Used to calculate the amount of seconds passed and will pass that information to the view
     void calculateStats();
@@ -54,6 +44,10 @@ public slots:
     /// @brief Starts the timer to track time from last pop up and sends a signal to the view
     ///         to draw a new pop up.
     void generatePopUp();
+    /// @brief Incremements popUpsClosed every time the player closes a pop up
+    void updatePopUpsClosed();
+    /// @brief Increments catsDodged every time the player dodges a cat
+    void updateCatsDodged();
 
 private:
     QTimer *popUpFrequency  = new QTimer(this);

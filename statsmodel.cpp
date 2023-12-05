@@ -57,13 +57,12 @@ void statsModel::levelUp()
     popUpFrequency->setInterval(currentPopUpFrequency);
 
     currentCatSpawnMaxWait  = currentCatSpawnMaxWait * 0.8f;
-    emit updateCatSpawnMaxWait(currentCatSpawnMaxWait);
-    emit changeBackground();
+    emit tellWorldLevelUp(currentCatSpawnMaxWait);
 }
 
 void statsModel::startGame()
 {
-    emit updateCatSpawnMaxWait(currentCatSpawnMaxWait);
+    emit tellWorldLevelUp(currentCatSpawnMaxWait);
     playTimeStopwatch.start();
     oneSecond       ->start();
     popUpFrequency  ->start();
