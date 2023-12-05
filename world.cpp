@@ -14,7 +14,6 @@ World::World(QWidget *parent) : QWidget(parent),
     float xMidpoint = width / 2.0f;
     world.SetContactListener(&listener);
 
-
     // Define the ground body.
     b2BodyDef groundBodyDef;
     groundBodyDef.position.Set(xMidpoint, height);

@@ -1,3 +1,12 @@
+/*
+Team Name   : Coders For Christ: New Testament
+Team Members: August O'Rourke
+              Luke Hamling
+              Ryan Dalrymple
+              Vincentio Dane
+Project Name: A9 - Educational App
+*/
+
 #include "mainwindow.h"
 #include "statsmodel.h"
 
