@@ -178,7 +178,7 @@ void World::SpawnNewCat()
         catBodies.insert(std::pair<qint64, b2Body*>(catData, cat));
         catData++;
     }
-    QTimer::singleShot(QRandomGenerator::global()->generate() % catSpawnMaxWait, Qt::PreciseTimer, this, [this](){SpawnNewCat();});
+    QTimer::singleShot(QRandomGenerator::global()->bounded(500, catSpawnMaxWait), Qt::PreciseTimer, this, [this](){SpawnNewCat();});
 }
 
 void World::markCatsForDeath(qint64 catID)
