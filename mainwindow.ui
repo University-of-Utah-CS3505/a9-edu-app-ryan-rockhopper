@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>950</width>
-    <height>693</height>
+    <width>942</width>
+    <height>677</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -152,7 +152,7 @@
    </widget>
    <widget class="QWidget" name="mainScreen" native="true">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="geometry">
      <rect>
@@ -166,7 +166,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>8</y>
+       <y>20</y>
        <width>691</width>
        <height>601</height>
       </rect>
@@ -281,8 +281,8 @@
      <rect>
       <x>10</x>
       <y>0</y>
-      <width>920</width>
-      <height>629</height>
+      <width>921</width>
+      <height>631</height>
      </rect>
     </property>
     <widget class="QWidget" name="verticalLayoutWidget_3">
@@ -290,11 +290,24 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>948</width>
-       <height>621</height>
+       <width>921</width>
+       <height>631</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="gameOverVerticalLayout">
+      <item>
+       <spacer name="upperGameOverSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
       <item>
        <widget class="QLabel" name="gameOver">
         <property name="enabled">
@@ -316,6 +329,19 @@
        </widget>
       </item>
       <item>
+       <spacer name="lowerGameOverSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="gameOverStatsLayout">
         <property name="spacing">
          <number>6</number>
@@ -323,23 +349,73 @@
         <property name="sizeConstraint">
          <enum>QLayout::SetDefaultConstraint</enum>
         </property>
-        <item alignment="Qt::AlignLeft">
-         <widget class="QLabel" name="statsRelatedToDistractedDriving">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+        <item>
+         <layout class="QVBoxLayout" name="distractedDrivingStatLayout">
+          <item>
+           <widget class="QLabel" name="drivingStats1">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;According to the Insurance Information Institute there were 3,211 fatal crashes in 2021, that were caused by distracted driving.&lt;br/&gt;&lt;br/&gt;According to NHTSA, people aged 16-24 are most likely to use their cellphones while driving.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="drivingStats2">
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Using NHTSA data, Forbes calculated that in Utah, 6.78% of fatal car accidents involved a distracted driver. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="gifLeftSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="gameOverGif">
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;According to the Insurance Information Institute there were 3,211 fatal crashes in 2021, that were caused by distracted driving.&lt;br/&gt;&lt;br/&gt;According to NHTSA, people aged 16-24 are most likely to use their cellphones while driving.&lt;br/&gt;&lt;br/&gt;Using NHTSA data, Forbes calculated that in Utah, 6.78% of fatal car accidents involved a distracted driver. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>GIF</string>
           </property>
-          <property name="wordWrap">
-           <bool>true</bool>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>
-        <item alignment="Qt::AlignRight">
+        <item>
+         <spacer name="gifRightSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
          <widget class="QLabel" name="gameStats">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
@@ -368,30 +444,18 @@
       </item>
      </layout>
     </widget>
-    <widget class="QLabel" name="gameOverGif">
-     <property name="geometry">
-      <rect>
-       <x>305</x>
-       <y>360</y>
-       <width>641</width>
-       <height>231</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>TextLabel</string>
-     </property>
-    </widget>
-    <zorder>gameOverGif</zorder>
-    <zorder>verticalLayoutWidget_3</zorder>
    </widget>
+   <zorder>startUpScreen</zorder>
+   <zorder>gameOverScreen</zorder>
+   <zorder>mainScreen</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>950</width>
-     <height>21</height>
+     <width>942</width>
+     <height>22</height>
     </rect>
    </property>
   </widget>
