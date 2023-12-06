@@ -20,6 +20,7 @@ public:
 signals:
     /// @brief This signal is called when the pop-up closes
     void popupClosed();
+
 private:
     Ui::PopUp *ui;
 

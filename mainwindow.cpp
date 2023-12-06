@@ -82,6 +82,7 @@ MainWindow::MainWindow(statsModel& model, QApplication* app, QWidget *parent)
             &statsModel::updatePopUpsClosed);
 
     ui->startButton->setStyleSheet(QString("QPushButton {background-color: rgb(106,255,77);}"));
+    ui->startButton->setIcon(QIcon(":/start.png"));
     startupScreen();
 }
 

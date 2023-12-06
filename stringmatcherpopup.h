@@ -61,7 +61,7 @@ signals:
     void popupClosed();
 
 public slots:
-    /// @brief This is the slat that gets called when the text the user typed in changes
+    /// @brief This is the slot that gets called when the text the user typed in changes
     void on_lineEdit_textChanged();
     /// @brief This is the slot that gets called when the pop-up is spawned to change the word the user should match
     void changeText();

@@ -58,6 +58,7 @@ SOURCES += \
     gamecollisionlistener.cpp \
     main.cpp \
     mainwindow.cpp \
+    meme.cpp \
     popup.cpp \
     statsmodel.cpp \
     stringmatcherpopup.cpp \
@@ -113,6 +114,7 @@ HEADERS += \
     Box2D/Rope/b2Rope.h \
     gamecollisionlistener.h \
     mainwindow.h \
+    meme.h \
     popup.h \
     statsmodel.h \
     stringmatcherpopup.h \
@@ -120,6 +122,7 @@ HEADERS += \
 
 FORMS += \
     mainwindow.ui \
+    meme.ui \
     popup.ui \
     stringmatcherpopup.ui
 

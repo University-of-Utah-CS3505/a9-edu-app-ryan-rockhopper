@@ -3,6 +3,7 @@
 
 #include "popup.h"
 #include "stringmatcherpopup.h"
+#include "meme.h"
 #include "statsmodel.h"
 #include "gamecollisionlistener.h"
 #include <QMainWindow>
@@ -55,6 +56,7 @@ private:
     Ui::MainWindow *ui;
     PopUp davidPopUp;
     StringMatcherPopup textMessage;
+    meme memePopup;
     QApplication* app;
     /// @brief This method overides the basic key press event
     /// @param event - the QKeyEvent Object passed in
