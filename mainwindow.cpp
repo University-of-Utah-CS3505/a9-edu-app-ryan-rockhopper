@@ -80,6 +80,7 @@ MainWindow::MainWindow(statsModel& model, QApplication* app, QWidget *parent)
             &model,
             &statsModel::updatePopUpsClosed);
 
+    ui->startButton->setStyleSheet(QString("QPushButton {background-color: rgb(106,255,77);}"));
     startupScreen();
 }
 
@@ -149,8 +150,8 @@ void MainWindow::gameOverScreen(int catsDodged, string timeAlive, string timeSin
     ui->mainScreen      ->setEnabled(false);
     ui->startUpScreen   ->hide();
     ui->mainScreen      ->hide();
-    davidPopUp    .hide();
-    textMessage   .hide();
+    davidPopUp          .hide();
+    textMessage         .hide();
     ui->gameOverScreen  ->setEnabled(true);
     ui->gameOverScreen  ->show();
 }
