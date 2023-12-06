@@ -57,6 +57,7 @@ private:
     PopUp davidPopUp;
     StringMatcherPopup textMessage;
     meme memePopup;
+    bool lastKeyPressedLeft;
     QApplication* app;
     /// @brief This method overides the basic key press event
     /// @param event - the QKeyEvent Object passed in

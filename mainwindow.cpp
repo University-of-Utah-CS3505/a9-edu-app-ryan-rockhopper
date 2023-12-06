@@ -117,10 +117,12 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_Right)
     {
+        lastKeyPressedLeft = false;
         emit rightKeyPressed();
     }
     if(event->key() == Qt::Key_Left)
     {
+        lastKeyPressedLeft = true;
         emit leftKeyPressed();
     }
 }
@@ -176,7 +178,15 @@ void MainWindow::placePopUp()
         int yPosition = QRandomGenerator::global()->generate() % 393;
         QPoint position = mapToGlobal(QPoint(xPosition,yPosition));
         davidPopUp.setGeometry(position.x(), position.y(), 450, 300);
-        emit leftKeyReleased();
+        if(lastKeyPressedLeft)
+        {
+            emit leftKeyReleased();
+        }
+        else
+        {
+            emit rightKeyReleased();
+        }
+
     }
     if (randomNum == 1)
     {
@@ -189,7 +199,14 @@ void MainWindow::placePopUp()
         QPoint position = mapToGlobal(QPoint(xPosition,yPosition));
         textMessage.setGeometry(position.x(), position.y(), 620, 300);
         emit spawnStringMatcher();
-        emit leftKeyReleased();
+        if(lastKeyPressedLeft)
+        {
+            emit leftKeyReleased();
+        }
+        else
+        {
+            emit rightKeyReleased();
+        }
     }
     if (randomNum == 2)
     {
@@ -201,7 +218,14 @@ void MainWindow::placePopUp()
         int yPosition = QRandomGenerator::global()->generate() % 343;
         QPoint position = mapToGlobal(QPoint(xPosition,yPosition));
         memePopup.setGeometry(position.x(), position.y(), 500, 350);
-        emit leftKeyReleased();
+        if(lastKeyPressedLeft)
+        {
+            emit leftKeyReleased();
+        }
+        else
+        {
+            emit rightKeyReleased();
+        }
     }
 }
 
