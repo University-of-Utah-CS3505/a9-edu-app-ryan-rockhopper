@@ -20,8 +20,9 @@ bool meme::isNumberInRange(int num)
 
 void meme::on_lineEdit_textChanged()
 {
-    int textValue = ui->lineEdit->text().toInt() - 1;
-    if (isNumberInRange(textValue))
+    bool conversionSuccess;
+    int textValue = ui->lineEdit->text().toInt(&conversionSuccess);
+    if (conversionSuccess && isNumberInRange(textValue))
     {
         this->close();
         emit popupClosed();
