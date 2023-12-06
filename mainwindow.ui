@@ -22,7 +22,7 @@
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="startUpScreen" native="true">
     <property name="enabled">
-     <bool>true</bool>
+     <bool>false</bool>
     </property>
     <property name="geometry">
      <rect>
@@ -87,7 +87,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Dodge the fallings cats by pressing the left or right arrow key. If you get hit by a cat, it is game over!</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dodge the incoming cats by pressing the left or right arrow key. If you get hit by a cat, it is game over!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -275,7 +275,7 @@
    </widget>
    <widget class="QWidget" name="gameOverScreen" native="true">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="geometry">
      <rect>
@@ -329,7 +329,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>According to the Insurance Information Institute there were 3,211 fatal crashes in 2021, that were caused by distracted driving</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;According to the Insurance Information Institute there were 3,211 fatal crashes in 2021, that were caused by distracted driving.&lt;br/&gt;&lt;br/&gt;According to NHTSA, people aged 16-24 are most likely to use their cellphones while driving.&lt;br/&gt;&lt;br/&gt;Using NHTSA data, Forbes calculated that in Utah, 6.78% of fatal car accidents involved a distracted driver. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="wordWrap">
            <bool>true</bool>
@@ -366,9 +366,6 @@
      </layout>
     </widget>
    </widget>
-   <zorder>mainScreen</zorder>
-   <zorder>gameOverScreen</zorder>
-   <zorder>startUpScreen</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
