@@ -42,7 +42,7 @@ public slots:
 
 signals:
     /// @brief This signal tells the string matcher pop-up to clear out the text that was typed in it last time
-    void spawnStringMatcher();
+    void changeTextToMatch();
     /// @brief This signal activates the move right event in world
     void rightKeyPressed();
     /// @brief This signal activates the stop move right event in world

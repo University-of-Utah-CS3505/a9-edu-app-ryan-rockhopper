@@ -24,7 +24,7 @@ signals:
     void popupClosed();
 
 public slots:
-    void on_lineEdit_textChanged();
+    void on_lineEdit_returnPressed();
 
 };
 
