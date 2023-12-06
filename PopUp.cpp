@@ -1,4 +1,4 @@
-#include "popup.h"
+#include "PopUp.h"
 #include "ui_popup.h"
 
 PopUp::PopUp(QWidget *parent) :

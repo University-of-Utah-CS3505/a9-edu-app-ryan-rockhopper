@@ -24,8 +24,8 @@ signals:
     void popupClosed();
 
 public slots:
+    /// @brief Checks if the rating is within a valid range (1-10) when the user hits enter
     void on_lineEdit_returnPressed();
-
 };
 
 #endif // MEME_H

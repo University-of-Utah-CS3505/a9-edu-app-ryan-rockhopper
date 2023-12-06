@@ -1,11 +1,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "popup.h"
+#include "PopUp.h"
 #include "stringmatcherpopup.h"
 #include "meme.h"
 #include "statsmodel.h"
-#include "gamecollisionlistener.h"
 #include <QMainWindow>
 #include <QKeyEvent>
 #include <QApplication>
@@ -26,6 +25,7 @@ public:
     /// @param model - this is the model object that goes with our game
     /// @param app - This is the appplicatation that the Main window is a part of
     MainWindow(statsModel& model, QApplication* app, QWidget *parent = nullptr);
+
     /// @brief This is the destructor for the MainWindow Object
     ~MainWindow();
 
@@ -41,15 +41,19 @@ public slots:
     void updateStatValues(int catsDodged, string timeAlive, int popUpsClosed, int currentLevel);
 
 signals:
-    /// @brief This signal tells the string matcher pop-up to clear out the text that was typed in it last time
+    /// @brief Updates the text that the user has to match
     void changeTextToMatch();
+
     /// @brief This signal activates the move right event in world
     void rightKeyPressed();
+
     /// @brief This signal activates the stop move right event in world
     void rightKeyReleased();
+
     /// @brief This signal activates the move left event in world
     void leftKeyPressed();
-    /// @brief This signal activates the move left event in world
+
+    /// @brief This signal activates the stop move left event in world
     void leftKeyReleased();
 
 private:
@@ -59,12 +63,15 @@ private:
     meme memePopup;
     bool lastKeyPressedLeft;
     QApplication* app;
+
     /// @brief This method overides the basic key press event
     /// @param event - the QKeyEvent Object passed in
     virtual void keyPressEvent(QKeyEvent *event);
+
     /// @brief This method overrides the basic key released event
     /// @param event - The QKeyEvent Object pased in
     virtual void keyReleaseEvent(QKeyEvent * event);
+
     /// @brief Displays the start up screen when the application begins.
     void startupScreen();
 
@@ -72,6 +79,11 @@ private:
     void mainScreen();
 
     /// @brief Changes the view to display the game over screen when the player has lost.
+    /// @param catsDodged is the number of cats dodged by the player so far
+    /// @param timeAlive is the time the player has been playing in mm:ss format
+    /// @param timeSincePopUp is the time since the last pop up has spawned
+    /// @param popUpsClosed is the amount of pop ups that has been closed by the player
+    /// @param currentLevel is the level the player is currently on
     void gameOverScreen(int catsDodged, string timeAlive, string timeSincePopUp, int popUpsClosed, int maxLevel);
 };
 #endif // MAINWINDOW_H
