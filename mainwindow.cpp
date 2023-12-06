@@ -23,7 +23,7 @@ MainWindow::MainWindow(statsModel& model, QApplication* app, QWidget *parent)
             this,
             &MainWindow::placePopUp);
     connect(this,
-            &MainWindow::spawnStringMatcher,
+            &MainWindow::changeTextToMatch,
             &textMessage,
             &StringMatcherPopup::changeText);
 
@@ -188,7 +188,7 @@ void MainWindow::placePopUp()
         int yPosition = QRandomGenerator::global()->generate() % 373;
         QPoint position = mapToGlobal(QPoint(xPosition,yPosition));
         textMessage.setGeometry(position.x(), position.y(), 620, 300);
-        emit spawnStringMatcher();
+        emit changeTextToMatch();
         emit leftKeyReleased();
     }
     if (randomNum == 2)

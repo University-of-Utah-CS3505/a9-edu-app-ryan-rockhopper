@@ -15,10 +15,10 @@ meme::~meme()
 
 bool meme::isNumberInRange(int num)
 {
-    return num >= 0 && num <= 9;
+    return num >= 1 && num <= 10;
 }
 
-void meme::on_lineEdit_textChanged()
+void meme::on_lineEdit_returnPressed()
 {
     bool conversionSuccess;
     int textValue = ui->lineEdit->text().toInt(&conversionSuccess);
