@@ -27,7 +27,7 @@
     <rect>
      <x>0</x>
      <y>90</y>
-     <width>301</width>
+     <width>511</width>
      <height>101</height>
     </rect>
    </property>
@@ -49,9 +49,9 @@ color: rgb(0, 0, 0);</string>
   <widget class="QLineEdit" name="lineEdit">
    <property name="geometry">
     <rect>
-     <x>300</x>
+     <x>100</x>
      <y>200</y>
-     <width>311</width>
+     <width>511</width>
      <height>91</height>
     </rect>
    </property>

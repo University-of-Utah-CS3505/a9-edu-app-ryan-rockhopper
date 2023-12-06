@@ -2,6 +2,14 @@
 #define STRINGMATCHERPOPUP_H
 
 #include <QWidget>
+#include <string>
+#include <QFile>
+#include <QDebug>
+#include <QTextStream>
+#include <QRandomGenerator>
+
+using std::string;
+using std::vector;
 
 namespace Ui {
 class StringMatcherPopup;
@@ -19,7 +27,7 @@ public:
 
 private:
     Ui::StringMatcherPopup *ui;
-    std::vector<QString> words
+    vector<QString> words
     {
         "hi",
         "yo!",
@@ -41,6 +49,12 @@ private:
         "Outstanding!",
         "congratulations"
     };
+
+    vector<QString> dictionaryEntries;
+
+    /// @brief Opens the dictionary file and reads in each word into a vector
+    /// @param fileName is the name of the dictionary.txt file
+    void readDictionaryFile(QString fileName);
 
 signals:
     /// @brief This is the signal that the pop-up sends when it is closed

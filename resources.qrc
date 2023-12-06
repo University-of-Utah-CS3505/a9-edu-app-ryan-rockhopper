@@ -8,5 +8,6 @@
         <file>ice_template.png</file>
         <file>sand_template.png</file>
         <file>bouncy_template.png</file>
+        <file>safedict_complex.txt</file>
     </qresource>
 </RCC>

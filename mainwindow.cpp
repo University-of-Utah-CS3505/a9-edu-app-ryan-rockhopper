@@ -157,15 +157,15 @@ void MainWindow::gameOverScreen(int catsDodged, string timeAlive, string timeSin
 
 void MainWindow::placePopUp()
 {
-    if (rand() % 2 == 0)
+    if (QRandomGenerator::global()->generate() % 2 == 0)
     {
         // 950x693 is the game screen size, take the popup width and height to get the maximum x or y the top left corner of the pop can be, and still be on screen
         davidPopUp.setWindowFlags(Qt::FramelessWindowHint);
         davidPopUp.setWindowModality(Qt::ApplicationModal);
         davidPopUp.show();
         davidPopUp.windowHandle()->setScreen(app->screenAt(this->mapToGlobal(QPoint(this->width()/2, 0))));
-        int xPosition = rand() % 500;
-        int yPosition = rand() % 393;
+        int xPosition = QRandomGenerator::global()->generate() % 500;
+        int yPosition = QRandomGenerator::global()->generate() % 393;
         QPoint position = mapToGlobal(QPoint(xPosition,yPosition));
         davidPopUp.setGeometry(position.x(), position.y(), 450, 300);
         emit leftKeyReleased();
@@ -176,8 +176,8 @@ void MainWindow::placePopUp()
         textMessage.setWindowModality(Qt::ApplicationModal);
         textMessage.show();
         textMessage.windowHandle()->setScreen(app->screenAt(this->mapToGlobal(QPoint(this->width()/2, 0))));
-        int xPosition = rand() % 330;
-        int yPosition = rand() % 373;
+        int xPosition = QRandomGenerator::global()->generate() % 330;
+        int yPosition = QRandomGenerator::global()->generate() % 373;
         QPoint position = mapToGlobal(QPoint(xPosition,yPosition));
         textMessage.setGeometry(position.x(), position.y(), 620, 300);
         emit spawnStringMatcher();

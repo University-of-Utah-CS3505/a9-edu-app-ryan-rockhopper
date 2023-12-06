@@ -10,6 +10,7 @@
 #include <QApplication>
 #include <QString>
 #include <QWindow>
+#include <QRandomGenerator>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
