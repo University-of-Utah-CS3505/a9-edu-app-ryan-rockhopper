@@ -85,7 +85,7 @@ void World::levelUpWorld(int newMaxCatWait)
     catSpawnMaxWait = newMaxCatWait;
     gameStarted = true;
 
-    int currentBackgroundIndex = rand() % worldBackgrounds.size();
+    int currentBackgroundIndex = QRandomGenerator::global()->generate() % worldBackgrounds.size();
     changePhysics(currentBackgroundIndex);
     currentBackground = worldBackgrounds.at(currentBackgroundIndex);
 }
@@ -162,7 +162,7 @@ void World::SpawnNewCat()
         b2BodyDef catBodyDef;
         catBodyDef.angularDamping = 1000; //this keeps the cat from rotating and making the collision weird
         catBodyDef.type = b2_dynamicBody;
-        catBodyDef.position.Set(rand() % (int)width, -80.0f);
+        catBodyDef.position.Set(QRandomGenerator::global()->generate() % (int)width, -80.0f);
         b2Body* cat = world.CreateBody(&catBodyDef);
         cat->SetUserData((void*) catData);
 
@@ -178,7 +178,7 @@ void World::SpawnNewCat()
         catBodies.insert(std::pair<qint64, b2Body*>(catData, cat));
         catData++;
     }
-    QTimer::singleShot(rand() % catSpawnMaxWait, Qt::PreciseTimer, this, [this](){SpawnNewCat();});
+    QTimer::singleShot(QRandomGenerator::global()->generate() % catSpawnMaxWait, Qt::PreciseTimer, this, [this](){SpawnNewCat();});
 }
 
 void World::markCatsForDeath(qint64 catID)

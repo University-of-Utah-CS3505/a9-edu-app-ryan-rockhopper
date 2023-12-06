@@ -10,6 +10,7 @@
 #include <QApplication>
 #include <QString>
 #include <QWindow>
+#include <QRandomGenerator>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -52,8 +53,8 @@ signals:
 
 private:
     Ui::MainWindow *ui;
-    PopUp distractionWindow;
-    StringMatcherPopup distractionWindow2;
+    PopUp davidPopUp;
+    StringMatcherPopup textMessage;
     QApplication* app;
     /// @brief This method overides the basic key press event
     /// @param event - the QKeyEvent Object passed in

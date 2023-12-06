@@ -79,6 +79,22 @@
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="gameplayInstructions">
+        <property name="font">
+         <font>
+          <family>Droid Sans Fallback</family>
+          <pointsize>13</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dodge the incoming cats by pressing the left or right arrow key. If you get hit by a cat, it is game over!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="startupUpperSpacer">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -316,7 +332,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>According to the Insurance Information Institute there were 3,211 fatal crashes in 2021, that were caused by distracted driving</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;According to the Insurance Information Institute there were 3,211 fatal crashes in 2021, that were caused by distracted driving.&lt;br/&gt;&lt;br/&gt;According to NHTSA, people aged 16-24 are most likely to use their cellphones while driving.&lt;br/&gt;&lt;br/&gt;Using NHTSA data, Forbes calculated that in Utah, 6.78% of fatal car accidents involved a distracted driver. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="wordWrap">
            <bool>true</bool>

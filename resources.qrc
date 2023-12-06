@@ -9,5 +9,6 @@
         <file>sand_template.png</file>
         <file>bouncy_template.png</file>
         <file>catDriving.gif</file>
+	<file>safedict_complex.txt</file>
     </qresource>
 </RCC>
