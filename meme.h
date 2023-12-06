@@ -14,6 +14,7 @@ class meme : public QWidget
 public:
     explicit meme(QWidget *parent = nullptr);
     ~meme();
+    bool isNumberInRange(int number);
 
 private:
     Ui::meme *ui;
@@ -23,7 +24,7 @@ signals:
     void popupClosed();
 
 public slots:
-    void on_lineEdit_ratingChanged();
+    void on_lineEdit_textChanged();
 
 };
 

@@ -1,6 +1,5 @@
 #include "meme.h"
 #include "ui_meme.h"
-#include <QRegularExpression>
 
 meme::meme(QWidget *parent) :
     QWidget(parent),
@@ -14,10 +13,15 @@ meme::~meme()
     delete ui;
 }
 
-void meme::on_lineEdit_ratingChanged()
+bool meme::isNumberInRange(int num)
 {
-    QRegularExpression regex("^[0-9]$");
-    if (regex.match(ui->lineEdit->text()).hasMatch())
+    return num >= 0 && num <= 9;
+}
+
+void meme::on_lineEdit_textChanged()
+{
+    int textValue = ui->lineEdit->text().toInt() - 1;
+    if (isNumberInRange(textValue))
     {
         this->close();
         emit popupClosed();

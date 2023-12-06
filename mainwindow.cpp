@@ -164,7 +164,8 @@ void MainWindow::gameOverScreen(int catsDodged, string timeAlive, string timeSin
 
 void MainWindow::placePopUp()
 {
-    if (QRandomGenerator::global()->generate() % 2 == 0)
+    int randomNum = QRandomGenerator::global()->bounded(3);
+    if (randomNum == 0)
     {
         // 950x693 is the game screen size, take the popup width and height to get the maximum x or y the top left corner of the pop can be, and still be on screen
         davidPopUp.setWindowFlags(Qt::FramelessWindowHint);
@@ -177,7 +178,7 @@ void MainWindow::placePopUp()
         davidPopUp.setGeometry(position.x(), position.y(), 450, 300);
         emit leftKeyReleased();
     }
-    else
+    if (randomNum == 1)
     {
         textMessage.setWindowFlags(Qt::FramelessWindowHint);
         textMessage.setWindowModality(Qt::ApplicationModal);
@@ -188,6 +189,18 @@ void MainWindow::placePopUp()
         QPoint position = mapToGlobal(QPoint(xPosition,yPosition));
         textMessage.setGeometry(position.x(), position.y(), 620, 300);
         emit spawnStringMatcher();
+        emit leftKeyReleased();
+    }
+    if (randomNum == 2)
+    {
+        memePopup.setWindowFlags(Qt::FramelessWindowHint);
+        memePopup.setWindowModality(Qt::ApplicationModal);
+        memePopup.show();
+        memePopup.windowHandle()->setScreen(app->screenAt(this->mapToGlobal(QPoint(this->width()/2, 0))));
+        int xPosition = QRandomGenerator::global()->generate() % 450;
+        int yPosition = QRandomGenerator::global()->generate() % 343;
+        QPoint position = mapToGlobal(QPoint(xPosition,yPosition));
+        memePopup.setGeometry(position.x(), position.y(), 500, 350);
         emit leftKeyReleased();
     }
 }
